@@ -1,0 +1,90 @@
+@import "mixin";
+@import "variables";
+.listing_tab {
+  font-family: Quicksand;
+  margin: 24px;
+  .listing {
+    background-color: $light-White;
+    box-shadow: 0px 4px 6px $box-shadow-color;
+    padding: 16px;
+    margin-bottom: 24px;
+    // height: 244px;
+    hr {
+      height: 0px;
+      width: 100%;
+      border: none;
+      border-top: 1px solid #000000;
+      opacity: 0.12;
+    }
+
+    label {
+      font-size: 12px;
+      color: $lable-color;
+    }
+    p {
+      color: $black-font;
+      font-size: 14px;
+      font-weight: 600;
+    }
+  }
+}
+
+.tab {
+  @include flex(row, start, center);
+  // padding: 10px 0px;
+}
+.vertical_tab {
+  @include flex(column, default, start);
+}
+.job_role {
+  @include flex(row, start, center);
+  .img_container {
+    border: 1px solid black;
+    margin-right: 8px;
+    height: 24px;
+    width: 24px;
+    display: grid;
+    place-content: center;
+    // padding: 5px;
+    border-radius: 50%;
+    img {
+      object-fit: cover;
+    }
+  }
+  h5 {
+    border-right: 1px solid rgba(0, 0, 0, 0.123);
+    padding-right: 8px;
+    margin-right: 8px;
+  }
+}
+.date_time {
+  p {
+    padding-right: 8px;
+    border-right: 1px solid rgba(0, 0, 0, 0.123);
+  }
+}
+.location {
+  padding: 0px 10px;
+  padding-top: 20px;
+  @include flex(row, start, end);
+  img {
+    height: 18px;
+  }
+}
+.button_tab {
+  width: 100%;
+  @include flex(row, center, center);
+}
+hr {
+  height: 0px;
+  width: 100%;
+  border: none;
+  border-top: 1px solid #000000;
+  opacity: 0.12;
+}
+.margin {
+  margin: 24px;
+}
+.apply_tab {
+  width: 100%;
+}
