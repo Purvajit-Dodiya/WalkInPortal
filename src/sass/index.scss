@@ -63,6 +63,15 @@ body {
   padding: 0px 24px;
   width: 120px;
 }
+.user_profile {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 2px solid #2b8d5e;
+  margin: 0px 20px;
+  margin-left: auto;
+}
+
 .login_container {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
