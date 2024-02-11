@@ -5,25 +5,60 @@ import ApplicationForm from "./ApplicationForm";
 import Header from "../Header";
 import { data } from "./ListingData";
 import { Link, useParams } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const IndividualListing = () => {
-  const { id } = useParams(); // Get the id parameter from the URL
+  const isLoggedIn = () => {
+    const token = Cookies.get("walkInToken");
+
+    if (!token) {
+      window.location.href = "/login";
+      return false;
+    }
+
+    return true;
+  };
+  if (isLoggedIn()) {
+  }
+  const { id } = useParams();
   console.log(id);
-  // Find the listing with the matching id
+  const [indi, setListingDetails] = React.useState(null);
+  React.useEffect(() => {
+    const fetchListingDetails = async () => {
+      console.log("Fetching listing details...");
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/listing/${id}`,
+          {
+            headers: {
+              Authorization: Cookies.get("walkInToken"),
+            },
+          }
+        );
+
+        if (!response.ok) {
+          const errorMessage = `Failed to fetch listing details: ${response.status} ${response.statusText}`;
+          throw new Error(errorMessage);
+        }
+
+        const data = await response.json();
+        console.log("Listing details:", data);
+        setListingDetails(data);
+        console.log("indie:", indi.listing_display);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchListingDetails();
+  }, [id]);
   const listingData = data.find((item) => item.id === parseInt(id));
   const roles = {
     instructionalDesigner: listingData.instructionalDesigner,
     softwareEngineer: listingData.softwareEngineer,
     softwareQualityEngineer: listingData.softwareQualityEngineer,
   };
-  const [preRequisite, setPreRequisite] = React.useState(true);
-  console.log(preRequisite);
-  function togglePrerequisite(e) {
-    e.preventDefault();
-    setPreRequisite((prev) => {
-      return !prev;
-    });
-  }
+
   const [applicationData, setApplicationData] = React.useState({
     id: id,
     timeSlot: 1,
@@ -57,26 +92,21 @@ const IndividualListing = () => {
   return (
     <div className="head_body_footer">
       <Header />
-      <form class="listing_tab">
-        <ListingDisplay
-          apply={true}
-          handleForm={handleForm}
-          data={listingData}
-        />
-        <div class="Pre-requisites-head-tab">
-          <h3>Pre-requisites & Application Process</h3>
-          <button
-            className={`transparent_button  ${preRequisite ? "rotated" : ""}`}
-            onClick={togglePrerequisite}
-          >
-            <img src="/src/icons/expand_less_black_24dp.svg" alt="" />
-          </button>
-        </div>
-        {preRequisite && (
-          <div className="listing transition">
-            <Prerequisites data={listingData.PreRequisitesApplicationProcess} />
-          </div>
+      <form className="listing_tab">
+        {indi && (
+          <ListingDisplay
+            apply={true}
+            handleForm={handleForm}
+            data={indi.listing_display}
+          />
         )}
+        <details className="">
+          <summary className="details_header">
+            <h3>Pre-requisites & Application Process</h3>
+            <img src="/src/icons/expand_less_black_24dp.svg" alt="" />
+          </summary>
+          <Prerequisites data={listingData.PreRequisitesApplicationProcess} />
+        </details>
         <ApplicationForm
           applicationData={applicationData}
           handleChange={handleChange}

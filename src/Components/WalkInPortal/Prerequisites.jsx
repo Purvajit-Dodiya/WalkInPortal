@@ -3,7 +3,7 @@ import React from "react";
 function Prerequisites(props) {
   const display = props.data.map((data) => {
     return (
-      <div className="general-instruction-tab">
+      <div className="general-instruction-tab ">
         <label>{data.title}</label>
         <ul>
           <li>{data.description}</li>
@@ -11,7 +11,7 @@ function Prerequisites(props) {
       </div>
     );
   });
-  return <div>{display}</div>;
+  return <div className="listing details_tab">{display}</div>;
 }
 
 export default Prerequisites;

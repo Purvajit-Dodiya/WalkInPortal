@@ -2,14 +2,16 @@ import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../AuthProvider";
+import { useContext } from "react";
 
-export default function Login() {
+export default function Login(props) {
+  const { login } = useContext(AuthContext);
   const [loginDetails, setLoginDetails] = React.useState({
     email: "",
     password: "",
     rememberMe: true,
   });
-
   // console.log(loginDetails);
 
   function handleChange(event) {
@@ -27,10 +29,37 @@ export default function Login() {
     setShowPassword((prev) => !prev);
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     console.log(loginDetails);
-  }
+    const email = loginDetails.email;
+    const password = loginDetails.password;
+    try {
+      // Call the /login endpoint to authenticate user and retrieve token
+      const response = await fetch("http://localhost:3000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to login");
+      }
+
+      const data = await response.json();
+      console.log("response", data);
+      const authToken = data.token;
+
+      // Set the retrieved token in state
+      console.log("authToken", authToken);
+      login(authToken, email);
+      window.location.href = "/listing/1";
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   return (
     <div className="head_body_footer">

@@ -7,18 +7,24 @@ import upload from "/src/icons/Upload_black_24dp.svg";
 
 const ListingDisplay = (props) => {
   console.log(props.apply);
-  function formatDate(dateStr) {
-    const inputDate = new Date(dateStr);
-    const options = { year: "numeric", month: "short", day: "2-digit" };
-    const formattedDate = inputDate.toLocaleDateString("en-GB", options);
-    return formattedDate;
-  }
-
+  const instructionalDesigner =
+    props.data.offered_roles
+      .split(", ")
+      .filter((word) => word.trim() === "Instructional Designer").length > 0;
+  const softwareEngineer =
+    props.data.offered_roles
+      .split(", ")
+      .filter((word) => word.trim() === "Software Engineer").length > 0;
+  const softwareQualityEngineer =
+    props.data.offered_roles
+      .split(", ")
+      .filter((word) => word.trim() === "Software Quality Engineer").length > 0;
+  // const instructionalDesigner = false;
   // console.log(formattedDate);
   return (
     <section className="listing">
       <div className="tab apply_tab">
-        <h1>{props.data.listingTitle}</h1>
+        <h1>{props.data.listing_name}</h1>
         {props.apply && (
           <button onClick={props.handleForm} className="apply button">
             APPLY
@@ -28,20 +34,17 @@ const ListingDisplay = (props) => {
       <div className="tab">
         <div className="date_time">
           <label>Date & Time :</label>
-          <p>
-            {formatDate(props.data.dateStart)} to{" "}
-            {formatDate(props.data.dateEnd)}{" "}
-          </p>
+          <p>{props.data.Date}</p>
         </div>
         <div className="location">
           <img src={location_icon} alt="location" />
-          <p>{props.data.location}</p>
+          <p>{props.data.City}</p>
         </div>
       </div>
       <hr />
       <label>Job Roles :</label>
       <div className="tab">
-        {props.data.instructionalDesigner && (
+        {instructionalDesigner && (
           <div className="job_role">
             <div className="img_container">
               <img src={instructionalIcon} alt="" />
@@ -49,7 +52,7 @@ const ListingDisplay = (props) => {
             <h5>Instructional Designer</h5>
           </div>
         )}
-        {props.data.softwareEngineer && (
+        {softwareEngineer && (
           <div className="job_role">
             <div className="img_container">
               <img src={softwareQualityIcon} alt="" />
@@ -57,7 +60,7 @@ const ListingDisplay = (props) => {
             <h5>Software Engineer</h5>
           </div>
         )}
-        {props.data.softwareQualityEngineer && (
+        {softwareQualityEngineer && (
           <div className="job_role">
             <div className="img_container">
               <img src={softwareQualityIcon} alt="" />
@@ -68,7 +71,7 @@ const ListingDisplay = (props) => {
       </div>
       {props.apply === false && (
         <div className="button_tab">
-          <Link to={`/listing/${props.data.id}`}>
+          <Link to={`/listing/${props.data.listing_id}`}>
             <button className="button">VIEW MORE DETAILS</button>
           </Link>
           {/* <button className="button">VIEW MORE DETAILS</button> */}

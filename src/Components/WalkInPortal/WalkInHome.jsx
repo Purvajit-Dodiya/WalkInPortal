@@ -1,20 +1,31 @@
 import React from "react";
 import Header from "../Header";
 import ListingDisplay from "./ListingDisplay";
-import { data } from "./ListingData";
+// import { data } from "./ListingData";
 import { Link } from "react-router-dom";
 
 const WalkInHome = () => {
-  console.log(data);
-  const test = data.map((x) => (
-    <ListingDisplay apply={false} key={x.id} data={x} />
-    // <div key={x.id}>
-    //   {x.listingTitle}
-    //   <br />
-    //   {x.description}
-    //   {/* <a href="listing/"></a> */}
-    //   <Link to={`/listing/${x.id}`}>View Details</Link>
-    // </div>
+  const [ListingsData, setListingsData] = React.useState([]);
+  React.useEffect(() => {
+    const fetchListings = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/listing");
+        if (!response.ok) {
+          throw new Error("Failed to fetch listings");
+        }
+        const data = await response.json();
+        setListingsData(data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchListings();
+  }, []);
+
+  console.log(ListingsData);
+  const test = ListingsData.map((x) => (
+    <ListingDisplay apply={false} key={x.listing_id} data={x} />
   ));
   return (
     <section className="head_body_footer">

@@ -181,10 +181,7 @@ body {
   cursor: pointer;
 }
 .login_button:focus {
-  transform: translate3d(0, 2px, 0);
-  background-color: #2b8d5e;
-  box-shadow: #0000003d 0 0px 0px;
-  transition: all 0.2s ease-in-out;
+  transform: scale(0.9);
 }
 
 .register {
@@ -370,7 +367,11 @@ footer {
   font-size: 14px;
   box-shadow: #0000003d 0 3px 5px;
   cursor: pointer;
+  &:focus {
+    transform: scale(0.9);
+  }
 }
+
 .apply {
   margin-left: auto;
 }
