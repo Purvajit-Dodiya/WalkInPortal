@@ -21,15 +21,19 @@ const ApplicationForm = (props) => {
     });
   }
 
+  function prefferedRole(){
+    
+  }
+
   return (
-    <div class="application_form">
+    <div className="application_form">
       <h3>Time Slots & Preferences</h3>
-      <div class="vertical_tab">
+      <div className="vertical_tab">
         <label className="static_input_label">Select a Time Slot :</label>
         {timeSlotsRender()}
       </div>
       <hr />
-      <div className="pad">
+      {/* <div className="pad">
         <label className="static_input_label">Select Your Preference :</label>
         {props.roles.instructionalDesigner && (
           <div className="checkbox_container">
@@ -42,7 +46,7 @@ const ApplicationForm = (props) => {
               checked={props.applicationData.prefferedIstructionalDesigner}
             />
             <label
-              class="checkbox_label"
+              className="checkbox_label"
               htmlFor="prefferedIstructionalDesigner"
             >
               Istructional Designer
@@ -59,7 +63,10 @@ const ApplicationForm = (props) => {
               onChange={props.handleChange}
               checked={props.applicationData.prefferedSoftwareEngineer}
             />
-            <label class="checkbox_label" htmlFor="prefferedSoftwareEngineer">
+            <label
+              className="checkbox_label"
+              htmlFor="prefferedSoftwareEngineer"
+            >
               Software Engineer
             </label>
           </div>
@@ -75,7 +82,7 @@ const ApplicationForm = (props) => {
               checked={props.applicationData.prefferedSoftwareQualityEngineer}
             />
             <label
-              class="checkbox_label"
+              className="checkbox_label"
               htmlFor="prefferedSoftwareQualityEngineer"
             >
               Software Quality Engineer
@@ -83,8 +90,10 @@ const ApplicationForm = (props) => {
           </div>
         )}
       </div>
-      <hr class="second-hr" />
-      <div class="upload-box">
+       */}
+
+      <hr className="second-hr" />
+      <div className="upload-box">
         <div className="pad">
           <label htmlFor="resume" className="upload_label">
             <img src={upload} alt="up" />

@@ -13,7 +13,7 @@ function Technologies(props) {
           onChange={props.handleChange}
           checked={props.js}
         />
-        <label class="checkbox_label" htmlFor={props.js_n}>
+        <label className="checkbox_label" htmlFor={props.js_n}>
           Javascript
         </label>
       </div>
@@ -26,7 +26,7 @@ function Technologies(props) {
           onChange={props.handleChange}
           checked={props.ajs}
         />
-        <label class="checkbox_label" htmlFor={props.ajs_n}>
+        <label className="checkbox_label" htmlFor={props.ajs_n}>
           Angular JS
         </label>
       </div>
@@ -39,7 +39,7 @@ function Technologies(props) {
           onChange={props.handleChange}
           checked={props.react}
         />
-        <label class="checkbox_label" htmlFor={props.react_n}>
+        <label className="checkbox_label" htmlFor={props.react_n}>
           React
         </label>
       </div>
@@ -52,7 +52,7 @@ function Technologies(props) {
           onChange={props.handleChange}
           checked={props.nodejs}
         />
-        <label class="checkbox_label" htmlFor={props.nodejs_n}>
+        <label className="checkbox_label" htmlFor={props.nodejs_n}>
           Node JS
         </label>
       </div>
@@ -65,7 +65,7 @@ function Technologies(props) {
           onChange={props.handleChange}
           checked={props.other}
         />
-        <label class="checkbox_label" htmlFor={props.other_n}>
+        <label className="checkbox_label" htmlFor={props.other_n}>
           Others
         </label>
       </div>

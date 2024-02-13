@@ -62,10 +62,10 @@ const IndividualListing = () => {
   const [applicationData, setApplicationData] = React.useState({
     id: id,
     timeSlot: 1,
+    updatedResume: null,
     prefferedIstructionalDesigner: true,
     prefferedSoftwareEngineer: true,
     prefferedSoftwareQualityEngineer: true,
-    updatedResume: null,
   });
   function handleChange(event) {
     const { name, value, type, checked } = event.target;
@@ -117,7 +117,7 @@ const IndividualListing = () => {
             handleChange={handleChange}
             // id={id}
             timeSlots={listingDetails.timeSlots}
-            roles={roles}
+            roles={listingDetails.roles}
           />
         )}
         {listingDetails && <JobRolesDetails roles={listingDetails.roles} />}
