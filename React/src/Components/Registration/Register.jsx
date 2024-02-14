@@ -3,7 +3,23 @@ import PersonalInformation from "./PersonalInformation";
 import Qualifications from "./Qualifications";
 import ReviewAndProceed from "./ReviewAndProceed";
 import Header from "../Header";
+import Cookies from "js-cookie";
+
 function Register() {
+  const isLoggedIn = () => {
+    const token = Cookies.get("walkInToken");
+
+    if (!token) {
+      window.location.href = "/login";
+      return false;
+    }
+
+    return true;
+  };
+  if (isLoggedIn() === true) {
+    console.log("to home");
+    window.location.href = "/";
+  }
   const [stage, setstage] = React.useState(1);
   function nextStage() {
     // console.log("next");

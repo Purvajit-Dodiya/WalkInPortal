@@ -73,7 +73,7 @@ const IndividualListing = () => {
 
     setApplicationData((prevData) => {
       if (type === "file") {
-        // console.log(event.target.files[0]);
+        // console.log(event.target.files[0])
         return {
           ...prevData,
           [name]: event.target.files[0],

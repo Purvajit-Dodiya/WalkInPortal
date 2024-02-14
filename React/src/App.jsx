@@ -5,6 +5,7 @@ import {
   Routes,
   Outlet,
   Link,
+  Navigate,
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
@@ -21,6 +22,8 @@ const App = () => {
         <Route exact path="/login" element={<Login />}></Route>
         <Route path="/listing/:id" element={<IndividualListing />} />
         <Route exact path="/register" element={<Register />}></Route>
+        <Route exact path="/register" element={<Register />}></Route>
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );

@@ -144,6 +144,11 @@ type UserPreferredRoles {
   dt_modified: String!
 }
 
+type AuthPayload {
+    token: String
+    email: String
+  }
+
 type Query {
   getColleges : [Colleges],
   getJobRole(roleId:Int!):JobRoles
@@ -153,5 +158,44 @@ type Query {
   getAdditionalInformation(listingId: Int!) : [AdditionalInformation]
   getWalkinroles(listingId: Int!) : [WalkinRoles]
 }
+
+type Mutation {
+    login(email: String!, password: String!): AuthPayload
+    register(input: RegisterInput!): UserDetails
+  }
+
+  input RegisterInput {
+    email: String!
+    password: String!
+    phoneNumber: String!
+    firstName: String!
+    lastName: String!
+    resume: String
+    profilePhoto: String
+    portfolioURL: String
+    preferredJobRole: [String]!
+    haveReferral: Boolean!
+    referralEmployeeName: String
+    receiveUpdates: Boolean!
+    aggregatePercentage: Int!
+    passingYear: Int!
+    educationQualification: String!
+    stream: String!
+    collegeId: ID!
+    collegeLocation: String!
+    applicationType: String!
+    appliedBefore: Boolean!
+    roleApplied: String
+    technologiesFamiliar: [String]!
+    otherTechnologies: String
+    yearsOfExperience: Int
+    currentCTC: Int
+    expectedCTC: Int
+    technologiesExpertise: [String]!
+    otherExpertiseTechnologies: String
+    onNoticePeriod: Boolean!
+    endDateOfNotice: String
+    durationOfNoticePeriod: Int
+  }
 
 `;
