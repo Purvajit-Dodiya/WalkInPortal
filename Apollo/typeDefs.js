@@ -1,6 +1,6 @@
 export const typeDefs = `#graphql
     type UserCredentials {
-    ID: Int!
+    ID: ID!
     Email: String!
     Password: String!
     PhoneNumber: String!
@@ -12,7 +12,7 @@ export const typeDefs = `#graphql
     }
 
 type UserDetails {
-  UserId: Int!
+  UserId: ID!
   FirstName: String!
   LastName: String!
   Resume: String!
@@ -29,21 +29,21 @@ type UserDetails {
 }
 
 type Colleges {
-  college_id: Int!
+  college_id: ID!
   college_name: String!
   dt_created: String!
   dt_modified: String!
 }
 
 type EducationQualifications {
-  id: Int!
+  id: ID!
   education_qualification: String!
   dt_created: String!
   dt_modified: String!
 }
 
 type Qualifications {
-  UserId: Int!
+  UserId: ID!
   AggregatePercentage: Int!
   PassingYear: Int!
   EducationQualification: EducationQualifications
@@ -60,7 +60,7 @@ type Qualifications {
 }
 
 type UserExperience {
-  id: Int!
+  id: ID!
   user_id: Int!
   YearsOfExperience: Int
   CurrentCTC: Int
@@ -75,59 +75,59 @@ type UserExperience {
 }
 
 type WalkinListing {
-  listing_id: Int
-  listing_name: String
-  StartDate: String
-  EndDate: String
-  City: String
-  Venue: String
-  things_to_remember: String
-  dt_created: String
-  dt_modified: String
-  roles: [WalkinRoles]
-  timeslots: [WalkinTimeSlots]
-  additionalInformation: [AdditionalInformation]
+  listing_id: ID!
+  listing_name: String!
+  StartDate: String!
+  EndDate: String!
+  City: String!
+  Venue: String!
+  things_to_remember: String!
+  dt_created: String!
+  dt_modified: String!
+  roles: [WalkinRoles!]!
+  timeslots: [WalkinTimeSlots!]!
+  additionalInformation: [AdditionalInformation!]!
 }
 
 type JobRoles {
-  role_id: Int
-  role_name: String
-  role_description: String
-  role_requirements: String
-  gross_compensation: Int
-  dt_created: String
-  dt_modified: String
+  role_id: ID!
+  role_name: String!
+  role_description: String!
+  role_requirements: String!
+  gross_compensation: Int!
+  dt_created: String!
+  dt_modified: String!
 }
 
 type WalkinRoles {
-  id: Int
-  listing_id: Int
-  role: JobRoles
-  dt_created: String
-  dt_modified: String
+  id: ID!
+  listing_id: Int!
+  role: JobRoles!
+  dt_created: String!
+  dt_modified: String!
 }
 
 type WalkinTimeSlots {
-  id: Int
-  listing_id: Int
-  start_time: String
-  end_time: String
-  dt_created: String
-  dt_modified: String
+  id: ID!
+  listing_id: Int!
+  start_time: String!
+  end_time: String!
+  dt_created: String!
+  dt_modified: String!
 }
 
 type AdditionalInformation {
-  id: Int
-  listing_id: Int
-  information_heading: String
-  information: String
-  dt_created: String
-  dt_modified: String
+  id: ID!
+  listing_id: Int!
+  information_heading: String!
+  information: String!
+  dt_created: String!
+  dt_modified: String!
 }
 
 type UserApplication {
-  ApplicationId: Int!
-  listing_id: Int!
+  ApplicationId: ID!
+  listing_id: ID!
   user_id: Int!
   time_slot_id: Int!
   user_resume: String!
@@ -137,7 +137,7 @@ type UserApplication {
 }
 
 type UserPreferredRoles {
-  id: Int!
+  id: ID!
   application_id: Int!
   role: WalkinRoles
   dt_created: String!
@@ -149,6 +149,9 @@ type Query {
   getJobRole(roleId:Int!):JobRoles
   getWalkinListing(listingId: Int!): WalkinListing
   getAllWalkinListing : [WalkinListing]
+  getWalkinTimeSlots(listingId: Int!) : [WalkinTimeSlots]
+  getAdditionalInformation(listingId: Int!) : [AdditionalInformation]
+  getWalkinroles(listingId: Int!) : [WalkinRoles]
 }
 
 `;

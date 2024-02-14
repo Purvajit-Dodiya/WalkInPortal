@@ -47,63 +47,12 @@ const getWalkinListing = async (parent, args, context, info) => {
         SELECT * FROM walkinlisting
         WHERE listing_id = ?;
       `;
-
     db.query(query, [listingId], (error, results) => {
       if (error) {
         reject(error);
       } else {
-        const walkinListing = results[0];
-        // console.log("individual", walkinListing);
-        const rolesQuery = `
-            SELECT * FROM walkinroles
-            WHERE listing_id = ?;
-          `;
-
-        const timeslotsQuery = `
-            SELECT * FROM walkintimeslots
-            WHERE listing_id = ?;
-          `;
-
-        db.query(rolesQuery, [listingId], async (rolesError, rolesResults) => {
-          if (rolesError) {
-            reject(rolesError);
-          } else {
-            walkinListing.roles = [];
-
-            for (const role of rolesResults) {
-              // Call the getJobRole resolver for each role_id
-              const jobRole = await getJobRole(
-                null,
-                { roleId: role.role_id },
-                context,
-                info
-              );
-
-              // Add the retrieved jobRole to the walkinListing.roles array
-              walkinListing.roles.push({
-                id: role.id,
-                listing_id: role.listing_id,
-                role: jobRole,
-                dt_created: role.dt_created,
-                dt_modified: role.dt_modified,
-              });
-            }
-
-            db.query(
-              timeslotsQuery,
-              [listingId],
-              (timeslotsError, timeslotsResults) => {
-                if (timeslotsError) {
-                  reject(timeslotsError);
-                } else {
-                  walkinListing.timeslots = timeslotsResults;
-                  // console.log("final:", walkinListing);
-                  resolve(walkinListing);
-                }
-              }
-            );
-          }
-        });
+        console.log(results);
+        resolve(results[0]);
       }
     });
   });
@@ -149,12 +98,109 @@ const getAllWalkinListing = async (parent, args, context, info) => {
   });
 };
 
+const getWalkinTimeSlots = async (parent, args, context, info) => {
+  const { listingId } = args;
+
+  return new Promise((resolve, reject) => {
+    const query = `
+        SELECT * FROM walkintimeslots
+        WHERE listing_id = ?;
+      `;
+    db.query(query, [listingId], (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        console.log(results);
+        resolve(results);
+      }
+    });
+  });
+};
+
+const getAdditionalInformation = async (parent, args, context, info) => {
+  const { listingId } = args;
+
+  return new Promise((resolve, reject) => {
+    const query = `
+        SELECT * FROM additionalinformation
+        WHERE listing_id = ?;
+      `;
+    db.query(query, [listingId], (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+};
+const getWalkinroles = async (parent, args, context, info) => {
+  const { listingId } = args;
+
+  return new Promise((resolve, reject) => {
+    const query = `
+        SELECT * FROM walkinroles
+        WHERE listing_id = ?;
+      `;
+    db.query(query, [listingId], (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+};
+
 const resolvers = {
   Query: {
     getColleges,
     getJobRole,
     getWalkinListing,
     getAllWalkinListing,
+    getWalkinTimeSlots,
+    getAdditionalInformation,
+    getWalkinroles,
+  },
+  WalkinRoles: {
+    role(parent) {
+      const tmp = getJobRole(null, { roleId: parent.role_id }, "", "");
+      // console.log(tmp);
+      return tmp;
+    },
+  },
+
+  WalkinListing: {
+    roles(parent) {
+      const tmp = getWalkinroles(
+        null,
+        { listingId: parent.listing_id },
+        "",
+        ""
+      );
+      console.log("roles", tmp);
+      return tmp;
+    },
+    timeslots(parent) {
+      const tmp = getWalkinTimeSlots(
+        null,
+        { listingId: parent.listing_id },
+        "",
+        ""
+      );
+      console.log("timeslots", tmp);
+      return tmp;
+    },
+    additionalInformation(parent) {
+      const tmp = getAdditionalInformation(
+        null,
+        { listingId: parent.listing_id },
+        "",
+        ""
+      );
+      console.log("additionalInformation", tmp);
+      return tmp;
+    },
   },
 };
 
