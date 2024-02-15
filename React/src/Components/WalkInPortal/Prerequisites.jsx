@@ -4,9 +4,9 @@ function Prerequisites(props) {
   const display = props.data.map((data) => {
     return (
       <div className="general-instruction-tab ">
-        <label>{data.infoTile}</label>
+        <label>{data.information_heading}</label>
         <ul>
-          <li>{data.info}</li>
+          <li>{data.information}</li>
         </ul>
       </div>
     );

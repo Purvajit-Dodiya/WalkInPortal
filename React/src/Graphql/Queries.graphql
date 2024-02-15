@@ -1,0 +1,52 @@
+import { useQuery, gql } from '@apollo/client';
+
+export const getAllWalkinListing = gql`
+    query GetAllWalkinListing {
+    getAllWalkinListing {
+    listing_id
+    listing_name
+    StartDate
+    EndDate
+    City
+    things_to_remember
+        roles {
+            role {
+                role_name
+            }
+        }
+        }
+    }
+`;
+
+
+export const getWalkinListing = gql`
+    query GetWalkinListing($listingId: Int!) {
+  getWalkinListing(listingId: $listingId) {
+    listing_id
+    listing_name
+    StartDate
+    EndDate
+    City
+    additionalInformation {
+      id
+      information
+      information_heading
+    }
+    roles {
+      id
+      role {
+        role_id
+        role_name
+        gross_compensation
+        role_description
+        role_requirements
+      }
+    }
+    timeslots {
+      id
+      start_time
+      end_time
+    }
+  }
+}
+`;

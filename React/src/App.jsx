@@ -3,11 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Outlet,
-  Link,
   Navigate,
-  createBrowserRouter,
-  createRoutesFromElements,
 } from "react-router-dom";
 import Login from "./Components/Login";
 import Register from "./Components/Registration/Register";

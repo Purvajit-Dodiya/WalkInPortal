@@ -4,6 +4,8 @@ import Footer from "./Footer";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../AuthProvider";
 import { useContext } from "react";
+import { useQuery, useMutation, gql } from "@apollo/client";
+import { loginMutation } from "/src/Graphql/Mutation.graphql";
 
 export default function Login(props) {
   const { login } = useContext(AuthContext);
@@ -28,37 +30,49 @@ export default function Login(props) {
   function toggleShowPassword() {
     setShowPassword((prev) => !prev);
   }
-
+  const [loginMutationFn] = useMutation(loginMutation, {
+    variables: {
+      email: loginDetails.email.trim(),
+      password: loginDetails.password.trim(),
+    },
+    onCompleted: (data) => {
+      console.log("mutaion", data.login);
+      login(data.login.token, data.login.email);
+      window.location.href = "/";
+    },
+  });
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(loginDetails);
     const email = loginDetails.email;
     const password = loginDetails.password;
-    try {
-      // Call the /login endpoint to authenticate user and retrieve token
-      const response = await fetch("http://localhost:3000/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+    loginMutationFn();
 
-      if (!response.ok) {
-        throw new Error("Failed to login");
-      }
+    // try {
+    //   // Call the /login endpoint to authenticate user and retrieve token
+    //   const response = await fetch("http://localhost:3000/api/login", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({ email, password }),
+    //   });
 
-      const data = await response.json();
-      console.log("response", data);
-      const authToken = data.token;
+    //   if (!response.ok) {
+    //     throw new Error("Failed to login");
+    //   }
 
-      // Set the retrieved token in state
-      console.log("authToken", authToken);
-      login(authToken, email);
-      window.location.href = "/listing/1";
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    //   const data = await response.json();
+    //   console.log("response", data);
+    //   const authToken = data.token;
+
+    //   // Set the retrieved token in state
+    //   console.log("authToken", authToken);
+    //   login(authToken, email);
+    //   window.location.href = "/listing/1";
+    // } catch (error) {
+    //   console.error("Error:", error);
+    // }
   };
 
   return (

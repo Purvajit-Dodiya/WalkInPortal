@@ -133,15 +133,21 @@ type UserApplication {
   user_resume: String!
   dt_created: String!
   dt_modified: String!
+  listing:WalkinListing
   preferredRoles: [UserPreferredRoles]
 }
 
 type UserPreferredRoles {
   id: ID!
   application_id: Int!
+  role_id: ID!
   role: WalkinRoles
   dt_created: String!
   dt_modified: String!
+}
+
+type Message{
+  message: String
 }
 
 type AuthPayload {
@@ -157,11 +163,15 @@ type Query {
   getWalkinTimeSlots(listingId: Int!) : [WalkinTimeSlots]
   getAdditionalInformation(listingId: Int!) : [AdditionalInformation]
   getWalkinroles(listingId: Int!) : [WalkinRoles]
+  getWalkinrole(id: Int!) : WalkinRoles
+  getApplicationpreferredRoles(applicationId:ID!) : [UserPreferredRoles]
+  getApplication(ApplicationId:ID!):UserApplication
 }
 
 type Mutation {
     login(email: String!, password: String!): AuthPayload
     register(input: RegisterInput!): UserDetails
+    apply(input: ApplyInput!): Message
   }
 
   input RegisterInput {
@@ -197,5 +207,13 @@ type Mutation {
     endDateOfNotice: String
     durationOfNoticePeriod: Int
   }
+
+  input ApplyInput {
+  email: String!
+  listingId: ID!
+  timeSlotId: ID!
+  userResume: String!
+  preferredRoles: [ID!]!
+}
 
 `;
