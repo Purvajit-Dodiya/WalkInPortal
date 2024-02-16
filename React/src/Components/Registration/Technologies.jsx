@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Input from "../Input";
 
 function Technologies(props) {
   return (
@@ -69,17 +70,15 @@ function Technologies(props) {
           Others
         </label>
       </div>
-      <div className="input">
-        <input
-          type="text"
-          name={props.othertxt_n}
-          onChange={props.handleChange}
-          value={props.othertxt}
-          className="input_field"
-          required
-        />
-        <label className="static_input_label">If others, please mention</label>
-      </div>
+      <Input
+        type="text"
+        name={props.othertxt_n}
+        onChange={props.handleChange}
+        value={props.othertxt}
+        className="input_field"
+        label="If others, please mention"
+        required={props.other ? true : false}
+      />
     </div>
   );
 }

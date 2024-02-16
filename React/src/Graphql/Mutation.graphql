@@ -8,3 +8,25 @@ export const loginMutation =gql`
         }
     }
 `
+export const apllyMutation =gql`
+    mutation Apply($input: ApplyInput!) {
+        apply(input: $input) {
+            message
+        }
+    }
+`
+export const apllyMutation =gql`
+    mutation Register($input: RegisterInput!) {
+  register(input: $input) {
+    FirstName
+    HaveReferral
+    LastName
+    PortfolioURL
+    ReceiveUpdates
+    ProfilePhoto
+    ReferralEmployeeName
+    Resume
+    UserId
+  }
+}
+`

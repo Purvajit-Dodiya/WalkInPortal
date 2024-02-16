@@ -50,3 +50,36 @@ export const getWalkinListing = gql`
   }
 }
 `;
+export const getHallTicket = gql`
+    query GetHallTicket($email: String!, $listingId: Int!) {
+  getHallTicket(email: $email, listingId: $listingId) {
+    ApplicationId
+    listing_id
+    listing {
+      things_to_remember
+      Venue
+    }
+    timeslot {
+      start_time
+      end_time
+    }
+  }
+}
+`;
+export const getColleges = gql`
+   query GetColleges {
+  getColleges {
+    college_id
+    college_name
+  }
+}
+`;
+export const getEducationQualifications = gql`
+  query GetEducationQualifications {
+  getEducationQualifications {
+    education_qualification
+    id
+  }
+}
+`;
+

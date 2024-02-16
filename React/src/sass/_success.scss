@@ -1,0 +1,45 @@
+@import "mixin";
+@import "variables";
+
+.success_container {
+  //   width: 97.6rem;
+  width: 60%;
+  margin: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 4px 6px #0000003d;
+}
+
+.success_tick_container {
+  height: 100px;
+  width: 100px;
+  @include flex(row, center, center);
+  border-radius: 50%;
+  background-color: $correct-logo-color;
+  box-shadow: 0 4px 6px #00000029;
+  opacity: 1;
+  margin: 0 auto 0 auto;
+  transform: translateY(-50%);
+  .tick_img {
+    width: 5.359rem;
+    height: 4.941rem;
+  }
+}
+.success_title_container {
+  width: 100%;
+  text-align: center;
+}
+
+.button_container {
+  padding: 10px;
+  @include flex(row, center, center);
+}
+.linear_container {
+  @include flex(column, start, start);
+  gap: 9px;
+}
+.venue {
+  gap: 2px;
+}

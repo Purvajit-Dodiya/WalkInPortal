@@ -4,20 +4,31 @@ import Stagechange from "./Stagechange";
 import PersonalInfoForm from "./PersonalInfoForm";
 function PersonalInformation(props) {
   //   console.log("hi", props.stage);
-  function nextPage() {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     ///validate form on this page
+    if (
+      props.userDetails.prefferedIstructionalDesigner &&
+      props.userDetails.prefferedSoftwareEngineer &&
+      props.userDetails.prefferedSoftwareQualityEngineer
+    ) {
+      console.log(props.userDetails);
+    }
+
     props.nextStage();
-  }
+  };
 
   return (
-    <section>
+    <div>
       <ProgessBar stage={props.stage} />
-      <PersonalInfoForm
-        handleChange={props.handleChange}
-        userDetails={props.userDetails}
-      />
-      <Stagechange nextPage={nextPage} />
-    </section>
+      <form onSubmit={handleSubmit}>
+        <PersonalInfoForm
+          handleChange={props.handleChange}
+          userDetails={props.userDetails}
+        />
+        <Stagechange nextPage={handleSubmit} />
+      </form>
+    </div>
   );
 }
 

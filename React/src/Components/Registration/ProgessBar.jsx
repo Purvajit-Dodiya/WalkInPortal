@@ -11,14 +11,13 @@ function ProgessBar(props) {
         </div>
         <p>Create an account</p>
         <div className="action">
-          <button className="button">
-            <Link className="link" to="/login">
-              CANCEL
-            </Link>
-          </button>
+          <Link to="/login">
+            <button className="button">CANCEL</button>
+          </Link>
           <button
             className={`button ${props.stage != 3 ? " disabled_btn" : ""}`}
             disabled={props.stage != 3 ? true : false}
+            onClick={props.register}
           >
             CREATE
           </button>

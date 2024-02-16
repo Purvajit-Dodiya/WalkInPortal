@@ -10,7 +10,6 @@ function Register() {
     const token = Cookies.get("walkInToken");
 
     if (!token) {
-      window.location.href = "/login";
       return false;
     }
 
@@ -34,7 +33,7 @@ function Register() {
     lastname: "",
     email: "",
     phoneNumber: "",
-    resume: null,
+    resume: "test",
     portfolioUrl: "",
     prefferedIstructionalDesigner: false,
     prefferedSoftwareEngineer: false,
@@ -42,7 +41,7 @@ function Register() {
     profilePhoto: null,
     referredby: "",
     recieveJobUpdates: true,
-    aggregatePercentage: 0,
+    aggregatePercentage: null,
     yearOfPassing: null,
     qualification: "",
     stream: "",
@@ -72,7 +71,7 @@ function Register() {
     durationOfNoticePeriod: "",
   });
 
-  console.log(userDetails);
+  // console.log(userDetails);
 
   function handleChange(event) {
     const { name, value, type, checked } = event.target;

@@ -5,10 +5,12 @@ import Stagechange from "./Stagechange";
 import EducationQualificationForm from "./EducationQualificationForm";
 import ProfessionalQualifications from "./ProfessionalQualifications";
 function Qualifications(props) {
-  function nextPage() {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     ///validate form on this page
+
     props.nextStage();
-  }
+  };
   function prevPage() {
     //no need of validation
     props.prevStage();
@@ -16,17 +18,18 @@ function Qualifications(props) {
   return (
     <section>
       <ProgessBar stage={props.stage} />
+      <form onSubmit={handleSubmit}>
+        <EducationQualificationForm
+          handleChange={props.handleChange}
+          userDetails={props.userDetails}
+        />
+        <ProfessionalQualifications
+          handleChange={props.handleChange}
+          userDetails={props.userDetails}
+        />
 
-      <EducationQualificationForm
-        handleChange={props.handleChange}
-        userDetails={props.userDetails}
-      />
-      <ProfessionalQualifications
-        handleChange={props.handleChange}
-        userDetails={props.userDetails}
-      />
-
-      <Stagechange nextPage={nextPage} prevPage={prevPage} />
+        <Stagechange prevPage={prevPage} nextPage={true} />
+      </form>
     </section>
   );
 }

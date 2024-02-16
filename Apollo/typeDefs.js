@@ -134,6 +134,7 @@ type UserApplication {
   dt_created: String!
   dt_modified: String!
   listing:WalkinListing
+  timeslot:WalkinTimeSlots
   preferredRoles: [UserPreferredRoles]
 }
 
@@ -141,7 +142,7 @@ type UserPreferredRoles {
   id: ID!
   application_id: Int!
   role_id: ID!
-  role: WalkinRoles
+  role: JobRoles
   dt_created: String!
   dt_modified: String!
 }
@@ -157,15 +158,18 @@ type AuthPayload {
 
 type Query {
   getColleges : [Colleges],
+  getEducationQualifications : [EducationQualifications]
   getJobRole(roleId:Int!):JobRoles
   getWalkinListing(listingId: Int!): WalkinListing
   getAllWalkinListing : [WalkinListing]
   getWalkinTimeSlots(listingId: Int!) : [WalkinTimeSlots]
+  getWalkinTimeSlot(id: Int!) : WalkinTimeSlots
   getAdditionalInformation(listingId: Int!) : [AdditionalInformation]
   getWalkinroles(listingId: Int!) : [WalkinRoles]
   getWalkinrole(id: Int!) : WalkinRoles
   getApplicationpreferredRoles(applicationId:ID!) : [UserPreferredRoles]
   getApplication(ApplicationId:ID!):UserApplication
+  getHallTicket(email:String!, listingId:Int!):UserApplication
 }
 
 type Mutation {

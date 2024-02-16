@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import Input from "../Input";
+import Colleges from "./Selections/Colleges";
+import EducationQualification from "./Selections/EducationQualification";
+
 function EducationQualificationForm(props) {
   return (
     <section>
@@ -12,6 +15,7 @@ function EducationQualificationForm(props) {
           handleChange={props.handleChange}
           value={props.userDetails.aggregatePercentage}
           label="Aggregate Percentage*"
+          required
         />
         <div className="input col1">
           <select
@@ -20,6 +24,7 @@ function EducationQualificationForm(props) {
             id="yearOfPassing"
             className="input_field"
             onChange={props.handleChange}
+            required
           >
             <option value="">--choose year--</option>
             <option value="2018">2018</option>
@@ -35,20 +40,10 @@ function EducationQualificationForm(props) {
         </div>
 
         <div className="input col13">
-          <select
-            name="qualification"
-            value={props.userDetails.qualification}
-            id="qualification"
-            className="input_field"
-            onChange={props.handleChange}
-          >
-            <option value="">--choose qualification--</option>
-            <option value="bachelor">Bachelor's Degree</option>
-            <option value="master">Master's Degree</option>
-            <option value="phd">Ph.D.</option>
-            <option value="associate">Associate Degree</option>
-            <option value="diploma">Diploma</option>
-          </select>
+          <EducationQualification
+            handleChange={props.handleChange}
+            qualification={props.userDetails.qualification}
+          />
           <label className="static_input_label">Qualification</label>
         </div>
         <div className="input col35">
@@ -58,8 +53,10 @@ function EducationQualificationForm(props) {
             id="stream"
             className="input_field"
             onChange={props.handleChange}
+            required
           >
             <option value="">--choose stream--</option>
+
             <option value="cs">Computer Science</option>
             <option value="it">Information Technology</option>
             <option value="commerce">Commerce</option>
@@ -68,22 +65,10 @@ function EducationQualificationForm(props) {
           <label className="static_input_label">Stream*</label>
         </div>
         <div className="input col13">
-          <select
-            name="college"
-            value={props.userDetails.college}
-            id="college"
-            className="input_field"
-            onChange={props.handleChange}
-          >
-            <option value="">--choose college--</option>
-            <option value="nirma">Nirma Institute of Technology (NIRMA)</option>
-            <option value="ld">L.D. College of Engineering</option>
-            <option value="msu">Maharaja Sayajirao University (MSU)</option>
-            <option value="pit">Pune Institute of Technology (PIT)</option>
-            <option value="vjti">
-              Veermata Jijabai Technological Institute (VJTI)
-            </option>
-          </select>
+          <Colleges
+            college={props.userDetails.college}
+            handleChange={props.handleChange}
+          />
           <label className="static_input_label">College*</label>
         </div>
 
@@ -102,6 +87,7 @@ function EducationQualificationForm(props) {
           handleChange={props.handleChange}
           value={props.userDetails.collegeLocation}
           label="Where is your college located?*"
+          required
         />
       </div>
     </section>

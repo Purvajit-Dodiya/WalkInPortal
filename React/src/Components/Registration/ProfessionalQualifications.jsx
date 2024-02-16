@@ -7,7 +7,7 @@ function ProfessionalQualifications(props) {
   return (
     <section>
       <div className="form form_heading">Professional Qualifications</div>
-      <form className="form">
+      <section className="form">
         <div>
           <input
             type="radio"
@@ -28,9 +28,9 @@ function ProfessionalQualifications(props) {
           />
           <label htmlFor="fresher">Fresher</label>
         </div>
-      </form>
+      </section>
       <div className="pad"></div>
-      <form className="form">
+      <section className="form">
         <div>
           {props.userDetails.applicantType === "experienced" && (
             <ExperiecedForm
@@ -62,6 +62,7 @@ function ProfessionalQualifications(props) {
                 handleChange={props.handleChange}
                 value={props.userDetails.roleApplied}
                 label="If Yes, which role did you apply for?"
+                required={props.userDetails.appearedBefore === "Yes"}
               />
               <div>
                 <input
@@ -89,7 +90,7 @@ function ProfessionalQualifications(props) {
             </div>
           </div>
         </div>
-      </form>
+      </section>
     </section>
   );
 }

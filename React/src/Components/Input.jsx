@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 
 function Input(props) {
+  const className =
+    props.className != undefined ? "input " + props.className : "input";
   return (
-    <div
-      className={`input ${
-        props.className != undefined ? "" + props.className : ""
-      }`}
-    >
+    <div className={className}>
       <input
         type={props.type}
         name={props.name}

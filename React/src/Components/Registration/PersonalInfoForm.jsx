@@ -6,10 +6,20 @@ function PersonalInfoForm(props) {
       <div className="half">
         <Input
           type="text"
+          name="firstname"
+          handleChange={props.handleChange}
+          value={props.userDetails.firstname}
+          label="First Name*"
+          pattern="[A-Za-z ]{1,32}"
+          required
+        />
+        <Input
+          type="text"
           name="lastname"
           handleChange={props.handleChange}
           value={props.userDetails.lastname}
           label="Last Name*"
+          required
         />
         <Input
           type="text"
@@ -17,6 +27,7 @@ function PersonalInfoForm(props) {
           handleChange={props.handleChange}
           value={props.userDetails.email}
           label="Email ID*"
+          required
         />
         <Input
           type="number"
@@ -24,6 +35,7 @@ function PersonalInfoForm(props) {
           handleChange={props.handleChange}
           value={props.userDetails.phoneNumber}
           label="Phone Number*"
+          required
         />
         <div className="pad">
           <label htmlFor="resume" className="upload_label">
@@ -61,7 +73,7 @@ function PersonalInfoForm(props) {
               checked={props.userDetails.prefferedIstructionalDesigner}
             />
             <label
-              class="checkbox_label"
+              className="checkbox_label"
               htmlFor="prefferedIstructionalDesigner"
             >
               Istructional Designer
@@ -76,7 +88,10 @@ function PersonalInfoForm(props) {
               onChange={props.handleChange}
               checked={props.userDetails.prefferedSoftwareEngineer}
             />
-            <label class="checkbox_label" htmlFor="prefferedSoftwareEngineer">
+            <label
+              className="checkbox_label"
+              htmlFor="prefferedSoftwareEngineer"
+            >
               Software Engineer
             </label>
           </div>
@@ -90,7 +105,7 @@ function PersonalInfoForm(props) {
               checked={props.userDetails.prefferedSoftwareQualityEngineer}
             />
             <label
-              class="checkbox_label"
+              className="checkbox_label"
               htmlFor="prefferedSoftwareQualityEngineer"
             >
               Software Quality Engineer
@@ -115,7 +130,7 @@ function PersonalInfoForm(props) {
             onChange={props.handleChange}
             checked={props.userDetails.recieveJobUpdates}
           />
-          <label class="checkbox_label" htmlFor="recieveJobUpdates">
+          <label className="checkbox_label" htmlFor="recieveJobUpdates">
             Send me job related updates via mail
           </label>
         </div>

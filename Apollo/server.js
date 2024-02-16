@@ -20,6 +20,22 @@ const getColleges = async () => {
   });
 };
 
+const getEducationQualifications = async () => {
+  return new Promise((resolve, reject) => {
+    const query = `
+        SELECT * FROM education_qualifications;
+      `;
+
+    db.query(query, (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+};
+
 const getJobRole = async (parent, args, context, info) => {
   const { roleId } = args;
   return new Promise((resolve, reject) => {
@@ -133,6 +149,24 @@ const getWalkinTimeSlots = async (parent, args, context, info) => {
     });
   });
 };
+const getWalkinTimeSlot = async (parent, args, context, info) => {
+  const { id } = args;
+
+  return new Promise((resolve, reject) => {
+    const query = `
+        SELECT * FROM walkintimeslots
+        WHERE id = ?;
+      `;
+    db.query(query, [id], (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        console.log(results[0]);
+        resolve(results[0]);
+      }
+    });
+  });
+};
 
 const getAdditionalInformation = async (parent, args, context, info) => {
   const { listingId } = args;
@@ -204,10 +238,10 @@ const getApplicationpreferredRoles = async (parent, args, context, info) => {
 };
 const getApplication = async (parent, args, context, info) => {
   // console.log("in:", context);
-  const decodedToken = verifyToken(context.authorization);
-  if (!decodedToken) {
-    throw new Error("Unauthorized");
-  }
+  // const decodedToken = verifyToken(context.authorization);
+  // if (!decodedToken) {
+  //   throw new Error("Unauthorized");
+  // }
   const { ApplicationId } = args;
   return new Promise((resolve, reject) => {
     const query = `
@@ -223,6 +257,49 @@ const getApplication = async (parent, args, context, info) => {
       }
     });
   });
+};
+
+const getHallTicket = async (_, { email, listingId }, { context }) => {
+  try {
+    // Query to fetch userId based on email
+    const userIdQuery = `
+      SELECT ID FROM usercredentials WHERE Email = ?;
+    `;
+    const [user] = await new Promise((resolve, reject) => {
+      db.query(userIdQuery, [email], (error, results) => {
+        if (error) reject(error);
+        else resolve(results);
+      });
+    });
+
+    if (!user) {
+      throw new Error("User with the provided email not found");
+    }
+    console.log("id: ", user.ID);
+    const userId = user.ID;
+
+    // Query to fetch user application based on listingId and userId
+    const userApplicationQuery = `
+      SELECT * FROM userapplication WHERE listing_id = ? AND user_id = ?;
+    `;
+    const [userApplication] = await new Promise((resolve, reject) => {
+      db.query(userApplicationQuery, [listingId, userId], (error, results) => {
+        console.log("in query", results);
+        if (error) reject(error);
+        else resolve(results);
+      });
+    });
+
+    if (!userApplication) {
+      throw new Error(
+        "User application not found for the given listing and user"
+      );
+    }
+
+    return userApplication;
+  } catch (error) {
+    throw new Error("Failed to get hall ticket: " + error.message);
+  }
 };
 
 //MUTATIONS//
@@ -535,15 +612,18 @@ const applyMutaion = async (_, { input }) => {
 const resolvers = {
   Query: {
     getColleges,
+    getEducationQualifications,
     getJobRole,
     getWalkinListing,
     getAllWalkinListing,
     getWalkinTimeSlots,
+    getWalkinTimeSlot,
     getAdditionalInformation,
     getWalkinroles,
     getWalkinrole,
     getApplicationpreferredRoles,
     getApplication,
+    getHallTicket,
   },
   WalkinRoles: {
     role(parent, _, context, info) {
@@ -592,7 +672,8 @@ const resolvers = {
   },
   UserPreferredRoles: {
     role(parent, _, context, info) {
-      const tmp = getWalkinrole(parent, { id: parent.role_id }, context, info);
+      roleId;
+      const tmp = getJobRole(parent, { roleId: parent.role_id }, context, info);
       // console.log("roles", tmp);
       return tmp;
     },
@@ -614,6 +695,13 @@ const resolvers = {
         { applicationId: parent.ApplicationId },
         context,
         info
+      );
+    },
+    timeslot(parent, args, context, info) {
+      return getWalkinTimeSlot(
+        parent,
+        { id: parent.time_slot_id },
+        context.info
       );
     },
   },

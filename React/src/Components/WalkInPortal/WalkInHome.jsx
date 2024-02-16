@@ -33,13 +33,13 @@ const WalkInHome = () => {
   // }, []);
 
   console.log("ListingsData array", ListingsData);
-  const test = ListingsData.map((x) => (
+  const AllListing = ListingsData.map((x) => (
     <ListingDisplay apply={false} key={x.listing_id} data={x} />
   ));
   return (
     <section className="head_body_footer">
       <Header />
-      <div className="listing_tab">{test}</div>
+      <div className="listing_tab">{AllListing}</div>
     </section>
   );
 };

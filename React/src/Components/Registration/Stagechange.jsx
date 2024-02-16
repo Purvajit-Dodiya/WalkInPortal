@@ -4,15 +4,11 @@ function Stagechange(props) {
   return (
     <div className="center">
       {props.prevPage && (
-        <button className="button" onClick={props.prevPage}>
+        <button className="button" type="button" onClick={props.prevPage}>
           PREVOUS
         </button>
       )}
-      {props.nextPage && (
-        <button className="button" onClick={props.nextPage}>
-          NEXT
-        </button>
-      )}
+      {props.nextPage && <button className="button">NEXT</button>}
     </div>
   );
 }

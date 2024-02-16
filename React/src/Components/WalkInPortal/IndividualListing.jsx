@@ -7,106 +7,9 @@ import Header from "../Header";
 import { data } from "./ListingData";
 import { Link, useParams } from "react-router-dom";
 import Cookies from "js-cookie";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, useMutation, gql } from "@apollo/client";
 import { getWalkinListing } from "/src/Graphql/Queries.graphql";
-
-// const IndividualListing = () => {
-//   const isLoggedIn = () => {
-//     const token = Cookies.get("walkInToken");
-
-//     if (!token) {
-//       window.location.href = "/login";
-//       return false;
-//     }
-
-//     return true;
-//   };
-//   if (isLoggedIn()) {
-//   }
-//   const { id } = useParams();
-//   console.log(id);
-//   const [listingDetails, setListingDetails] = React.useState(null);
-//   console.log("listingDetails:", listingDetails);
-//   const { loading, error, data } = useQuery(getWalkinListing, {
-//     variables: { listingId: 1 },
-//   });
-//   if (loading) return "loading", loading;
-//   if (error) return "error", error.message;
-//   console.log("from graphql", data.getWalkinListing);
-//   React.useEffect(() => {
-//     const fetchListingDetails = async () => {
-//       if (data) setListingDetails(data.getWalkinListing);
-//     };
-//     fetchListingDetails();
-//   }, [id]);
-
-//   const [applicationData, setApplicationData] = React.useState({
-//     id: id,
-//     timeSlot: 1,
-//     updatedResume: null,
-//     prefferedRoles: [],
-//     prefferedIstructionalDesigner: true,
-//     prefferedSoftwareEngineer: true,
-//     prefferedSoftwareQualityEngineer: true,
-//   });
-//   function handleChange(event) {
-//     const { name, value, type, checked } = event.target;
-//     // console.log("name", name, value);
-
-//     setApplicationData((prevData) => {
-//       if (type === "file") {
-//         // console.log(event.target.files[0])
-//         return {
-//           ...prevData,
-//           [name]: event.target.files[0],
-//         };
-//       }
-//       return {
-//         ...prevData,
-//         [name]: type === "checkbox" ? checked : value,
-//       };
-//     });
-//   }
-//   function handleForm(event) {
-//     event.preventDefault();
-//     console.log(applicationData);
-//   }
-//   return (
-//     <div className="head_body_footer">
-//       <Header />
-//       <form className="listing_tab">
-//         {listingDetails && (
-//           <ListingDisplay
-//             key={listingDetails.listing_id}
-//             apply={true}
-//             handleForm={handleForm}
-//             data={listingDetails}
-//           />
-//         )}
-//         {/* {listingDetails && (
-//           <ApplicationForm
-//             applicationData={applicationData}
-//             handleChange={handleChange}
-//             // id={id}
-//             timeSlots={listingDetails.timeSlots}
-//             roles={listingDetails.roles}
-//           />
-//         )} */}
-//         {listingDetails && (
-//           <details className="">
-//             <summary className="details_header">
-//               <h3>Pre-requisites & Application Process</h3>
-//               <img src="/src/icons/expand_less_black_24dp.svg" alt="" />
-//             </summary>
-//             <Prerequisites data={listingDetails.additionalInformation} />
-//           </details>
-//         )}
-//         {listingDetails && <JobRolesDetails roles={listingDetails.roles} />}
-//       </form>
-//       <div></div>
-//     </div>
-//   );
-// };
+import { apllyMutation } from "/src/Graphql/Mutation.graphql";
 
 const IndividualListing = () => {
   const isLoggedIn = () => {
@@ -137,6 +40,16 @@ const IndividualListing = () => {
   console.log("listingDetails:", listingDetails);
   const { loading, error, data } = useQuery(getWalkinListing, {
     variables: { listingId: parseInt(id) },
+  });
+  const [apllyMutationFn] = useMutation(apllyMutation, {
+    onCompleted: (returnedData) => {
+      console.log("mutaion retun", returnedData.apply.message);
+      if (returnedData.apply.message === "Application successful") {
+        window.location.href = `/success/${id}`;
+      } else {
+        alert("Something went wrong try again later");
+      }
+    },
   });
 
   React.useEffect(() => {
@@ -175,6 +88,41 @@ const IndividualListing = () => {
   function handleForm(event) {
     event.preventDefault();
     console.log(applicationData);
+    if (
+      !(
+        applicationData.prefferedIstructionalDesigner ||
+        applicationData.prefferedSoftwareEngineer ||
+        applicationData.prefferedSoftwareQualityEngineer
+      )
+    ) {
+      alert("Choose at least one Job role");
+    } else {
+      if (!applicationData.resume) {
+        alert("Please upload your resume");
+      } else {
+        const preferredRoles = [];
+        if (applicationData.prefferedSoftwareEngineer) {
+          preferredRoles.push("1");
+        }
+        if (applicationData.prefferedIstructionalDesigner) {
+          preferredRoles.push("2");
+        }
+        if (applicationData.prefferedSoftwareQualityEngineer) {
+          preferredRoles.push("3");
+        }
+        apllyMutationFn({
+          variables: {
+            input: {
+              email: Cookies.get("walkInEmail"),
+              listingId: id,
+              timeSlotId: applicationData.timeSlot,
+              userResume: "testing.gmail.com",
+              preferredRoles: preferredRoles,
+            },
+          },
+        });
+      }
+    }
   }
 
   if (loading) return "loading";
@@ -218,38 +166,3 @@ const IndividualListing = () => {
 };
 
 export default IndividualListing;
-
-// React.useEffect(() => {
-//   const fetchListingDetails = async () => {
-//     console.log("Fetching listing details...");
-//     try {
-//       const response = await fetch(
-//         `http://localhost:3000/api/listing/${id}`,
-//         {
-//           headers: {
-//             Authorization: Cookies.get("walkInToken"),
-//           },
-//         }
-//       );
-
-//       if (!response.ok) {
-//         const errorMessage = `Failed to fetch listing details: ${response.status} ${response.statusText}`;
-//         throw new Error(errorMessage);
-//       }
-
-//       const data = await response.json();
-//       console.log("Listing details:", data);
-//       setListingDetails(data);
-//     } catch (error) {
-//       console.error("Error:", error);
-//     }
-//   };
-
-//   fetchListingDetails();
-// }, [id]);
-// const listingData = data.find((item) => item.id === parseInt(id));
-// const roles = {
-//   instructionalDesigner: listingData.instructionalDesigner,
-//   softwareEngineer: listingData.softwareEngineer,
-//   softwareQualityEngineer: listingData.softwareQualityEngineer,
-// };

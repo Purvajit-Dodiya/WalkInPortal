@@ -14,7 +14,10 @@ function ExperiecedForm(props) {
     mm = "0" + mm;
   }
   today = yyyy + "-" + mm + "-" + dd;
-
+  let Isexperienced = false;
+  if (props.userDetails.applicantType === "experienced") {
+    Isexperienced = true;
+  }
   return (
     <section className="expericed_form">
       <Input
@@ -23,6 +26,7 @@ function ExperiecedForm(props) {
         handleChange={props.handleChange}
         value={props.userDetails.yearsOfExperiece}
         label="Years Of Experiece*"
+        required={Isexperienced}
       />
       <Input
         type="number"
@@ -30,6 +34,7 @@ function ExperiecedForm(props) {
         handleChange={props.handleChange}
         value={props.userDetails.currentCTC}
         label="Current CTC* (In Rupees)"
+        required={Isexperienced}
       />
       <Input
         type="number"
@@ -37,6 +42,7 @@ function ExperiecedForm(props) {
         handleChange={props.handleChange}
         value={props.userDetails.expectedCTC}
         label="Expected CTC* (In Rupees)"
+        required={Isexperienced}
       />
       <Technologies
         handleChange={props.handleChange}
@@ -54,6 +60,9 @@ function ExperiecedForm(props) {
         othertxt_n="expertiseInTechnologiesotherTechnology"
         othertxt={props.userDetails.expertiseInTechnologiesotherTechnology}
       />
+      <label className="static_input_label">
+        Are you currently on notice period?*
+      </label>
       <div>
         <input
           type="radio"
@@ -82,6 +91,7 @@ function ExperiecedForm(props) {
         value={props.userDetails.endOfNoticePeriod}
         min={today}
         label="If Yes, when will your notice period end?*"
+        required={props.userDetails.onNoticePeriod === "Yes"}
       />
       <Input
         type="text"
@@ -90,6 +100,7 @@ function ExperiecedForm(props) {
         value={props.userDetails.endOfNoticePeriod}
         min={today}
         label="How long is your notice period?* (Mention in months)"
+        required={props.userDetails.onNoticePeriod === "Yes"}
       />
     </section>
   );

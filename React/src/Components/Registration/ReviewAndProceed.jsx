@@ -5,14 +5,17 @@ import EducationQualificationForm from "./EducationQualificationForm";
 import ProfessionalQualifications from "./ProfessionalQualifications";
 import PersonalInfoForm from "./PersonalInfoForm";
 function ReviewAndProceed(props) {
+  function register() {
+    console.log(props.userDetails);
+  }
   function prevPage() {
     ///validate form on this page
     //no need of validation
     props.prevStage();
   }
   return (
-    <div>
-      <ProgessBar stage={props.stage} />
+    <section>
+      <ProgessBar stage={props.stage} register={register} />
       <fieldset disabled="disabled">
         <PersonalInfoForm
           handleChange={props.handleChange}
@@ -32,7 +35,7 @@ function ReviewAndProceed(props) {
         />
       </fieldset>
       <Stagechange prevPage={prevPage} />
-    </div>
+    </section>
   );
 }
 
