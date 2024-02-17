@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Input from "../Input";
 function PersonalInfoForm(props) {
   return (
-    <section className="form personal_info">
+    <section className="container personal_info">
       <div className="half">
         <Input
           type="text"

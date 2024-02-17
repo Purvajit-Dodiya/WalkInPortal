@@ -66,22 +66,28 @@ function ExperiecedForm(props) {
       <div>
         <input
           type="radio"
+          className="radio"
           id="onNoticePeriodyes"
           name="onNoticePeriod"
           value="Yes"
           checked={props.userDetails.onNoticePeriod === "Yes"}
           onChange={props.handleChange}
         />
-        <label htmlFor="onNoticePeriodyes">Yes</label>
+        <label htmlFor="onNoticePeriodyes" className="radio_label">
+          Yes
+        </label>
         <input
           type="radio"
+          className="radio"
           id="onNoticePeriodno"
           name="onNoticePeriod"
           value="No"
           checked={props.userDetails.onNoticePeriod === "No"}
           onChange={props.handleChange}
         />
-        <label htmlFor="onNoticePeriodno">No</label>
+        <label className="radio_label" htmlFor="onNoticePeriodno">
+          No
+        </label>
       </div>
 
       <Input

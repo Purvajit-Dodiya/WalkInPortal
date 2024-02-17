@@ -4,25 +4,17 @@
   font-family: Quicksand;
   margin: 24px;
   .listing {
-    background-color: $light-White;
-    box-shadow: 0px 4px 6px $box-shadow-color;
+    background-color: $card-color;
+    @include dropshadow();
     padding: 16px;
     margin-bottom: 24px;
     // height: 244px;
-    hr {
-      height: 0px;
-      width: 100%;
-      border: none;
-      border-top: 1px solid #000000;
-      opacity: 0.12;
-    }
-
     label {
       font-size: 12px;
-      color: $lable-color;
+      color: $secondary-text-color;
     }
     p {
-      color: $black-font;
+      color: $black;
       font-size: 14px;
       font-weight: 600;
     }
@@ -36,22 +28,22 @@
 .vertical_tab {
   @include flex(column, default, start);
 }
-.job_role {
+.job_role_container {
   @include flex(row, start, center);
   .img_container {
-    border: 1px solid black;
+    border: 1px solid $black;
     margin-right: 8px;
-    height: 24px;
-    width: 24px;
+    min-height: 24px;
+    min-width: 24px;
     display: grid;
     place-content: center;
-    // padding: 5px;
     border-radius: 50%;
     img {
       object-fit: cover;
     }
   }
-  h5 {
+  .job_role_text {
+    color: $link-text-color;
     border-right: 1px solid rgba(0, 0, 0, 0.123);
     padding-right: 8px;
     margin-right: 8px;
@@ -75,12 +67,13 @@
   width: 100%;
   @include flex(row, center, center);
 }
+
 hr {
   height: 0px;
   width: 100%;
   border: none;
-  border-top: 1px solid #000000;
-  opacity: 0.12;
+  border-top: 1px solid $seperator-color;
+  margin: 16px 0px;
 }
 .margin {
   margin: 24px;

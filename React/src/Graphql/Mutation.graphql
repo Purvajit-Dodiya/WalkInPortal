@@ -15,7 +15,7 @@ export const apllyMutation =gql`
         }
     }
 `
-export const apllyMutation =gql`
+export const registerMutation =gql`
     mutation Register($input: RegisterInput!) {
   register(input: $input) {
     FirstName

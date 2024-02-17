@@ -6,8 +6,8 @@ import EducationQualification from "./Selections/EducationQualification";
 function EducationQualificationForm(props) {
   return (
     <section>
-      <div className="form form_heading">Educational Qualifications</div>
-      <div className="form educational_qualifications">
+      <div className="form_heading">Educational Qualifications</div>
+      <div className="container educational_qualifications">
         <Input
           className="col1"
           type="number"

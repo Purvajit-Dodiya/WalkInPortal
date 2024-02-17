@@ -4,6 +4,9 @@
   align-items: $align;
   flex-direction: $flexDir;
 }
+@mixin dropshadow() {
+  box-shadow: 0px 4px 6px #0000003d;
+}
 // @mixin button($padding) {
 //   button {
 //     background-color: #3fd28b;

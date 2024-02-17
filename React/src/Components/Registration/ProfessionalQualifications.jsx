@@ -6,31 +6,40 @@ import Input from "../Input";
 function ProfessionalQualifications(props) {
   return (
     <section>
-      <div className="form form_heading">Professional Qualifications</div>
-      <section className="form">
-        <div>
-          <input
-            type="radio"
-            id="experienced"
-            name="applicantType"
-            value="experienced"
-            checked={props.userDetails.applicantType === "experienced"}
-            onChange={props.handleChange}
-          />
-          <label htmlFor="experienced">Experienced</label>
-          <input
-            type="radio"
-            id="fresher"
-            name="applicantType"
-            value="fresher"
-            checked={props.userDetails.applicantType === "fresher"}
-            onChange={props.handleChange}
-          />
-          <label htmlFor="fresher">Fresher</label>
+      <div className="form_heading">Professional Qualifications</div>
+      <section className="container">
+        <div className="input">
+          <div>
+            <input
+              type="radio"
+              className="radio"
+              id="fresher"
+              name="applicantType"
+              value="fresher"
+              checked={props.userDetails.applicantType === "fresher"}
+              onChange={props.handleChange}
+            />
+            <label className="radio_label" htmlFor="fresher">
+              Fresher
+            </label>
+            <input
+              type="radio"
+              className="radio"
+              id="experienced"
+              name="applicantType"
+              value="experienced"
+              checked={props.userDetails.applicantType === "experienced"}
+              onChange={props.handleChange}
+            />
+            <label className="radio_label" htmlFor="experienced">
+              Experienced
+            </label>
+          </div>
+          <label className="static_input_label">Applicant Type*</label>
         </div>
       </section>
       <div className="pad"></div>
-      <section className="form">
+      <section className="container">
         <div>
           {props.userDetails.applicantType === "experienced" && (
             <ExperiecedForm
@@ -67,22 +76,28 @@ function ProfessionalQualifications(props) {
               <div>
                 <input
                   type="radio"
+                  className="radio"
                   id="appearedBeforeyes"
                   name="appearedBefore"
                   value="Yes"
                   checked={props.userDetails.appearedBefore === "Yes"}
                   onChange={props.handleChange}
                 />
-                <label htmlFor="appearedBeforeyes">Yes</label>
+                <label className="radio_label" htmlFor="appearedBeforeyes">
+                  Yes
+                </label>
                 <input
                   type="radio"
+                  className="radio"
                   id="appearedBeforeno"
                   name="appearedBefore"
                   value="No"
                   checked={props.userDetails.appearedBefore === "No"}
                   onChange={props.handleChange}
                 />
-                <label htmlFor="appearedBeforeno">No</label>
+                <label className="radio_label" htmlFor="appearedBeforeno">
+                  No
+                </label>
               </div>
               <label className="static_input_label">
                 Have You Appeared For Any Test By Zeus in the past 12 months?*

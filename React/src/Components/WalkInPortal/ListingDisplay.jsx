@@ -13,11 +13,11 @@ const ListingDisplay = (props) => {
   const rolesDisplay = props.data.roles.map((x) => {
     console.log(x.role.role_name);
     return (
-      <div className="job_role">
+      <div className="job_role_container">
         <div className="img_container">
           <img src={instructionalIcon} alt="" />
         </div>
-        <h5>{x.role.role_name}</h5>
+        <h4 className="job_role_text">{x.role.role_name}</h4>
       </div>
     );
   });
@@ -60,32 +60,6 @@ const ListingDisplay = (props) => {
       </div>
       <hr />
       <label>Job Roles :</label>
-      {/* <div className="tab">
-        {instructionalDesigner && (
-          <div className="job_role">
-            <div className="img_container">
-              <img src={instructionalIcon} alt="" />
-            </div>
-            <h5>Instructional Designer</h5>
-          </div>
-        )}
-        {softwareEngineer && (
-          <div className="job_role">
-            <div className="img_container">
-              <img src={softwareQualityIcon} alt="" />
-            </div>
-            <h5>Software Engineer</h5>
-          </div>
-        )}
-        {softwareQualityEngineer && (
-          <div className="job_role">
-            <div className="img_container">
-              <img src={softwareQualityIcon} alt="" />
-            </div>
-            <h5>Software Quality Engineer</h5>
-          </div>
-        )}
-      </div> */}
       <div className="tab">{rolesDisplay}</div>
 
       {props.apply === false && (
