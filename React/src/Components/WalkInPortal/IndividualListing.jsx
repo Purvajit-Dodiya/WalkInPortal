@@ -10,20 +10,9 @@ import Cookies from "js-cookie";
 import { useQuery, useMutation, gql } from "@apollo/client";
 import { getWalkinListing } from "/src/Graphql/Queries.graphql";
 import { apllyMutation } from "/src/Graphql/Mutation.graphql";
+import { checkLoggedIn } from "../Utils";
 
 const IndividualListing = () => {
-  const isLoggedIn = () => {
-    const token = Cookies.get("walkInToken");
-
-    if (!token) {
-      window.location.href = "/login";
-      return false;
-    }
-
-    return true;
-  };
-  if (isLoggedIn()) {
-  }
   const { id } = useParams();
   console.log(id);
 
@@ -130,7 +119,7 @@ const IndividualListing = () => {
 
   return (
     <div className="head_body_footer">
-      <Header />
+      <Header user={true} />
       <form className="listing_tab">
         {listingDetails && (
           <ListingDisplay

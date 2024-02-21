@@ -193,7 +193,7 @@ type Mutation {
     receiveUpdates: Boolean!
     aggregatePercentage: Int!
     passingYear: Int!
-    educationQualification: String!
+    educationQualification: ID!
     stream: String!
     collegeId: ID!
     collegeLocation: String!

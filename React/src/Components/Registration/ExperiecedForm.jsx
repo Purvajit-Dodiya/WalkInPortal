@@ -101,9 +101,9 @@ function ExperiecedForm(props) {
       />
       <Input
         type="text"
-        name="endOfNoticePeriod"
+        name="durationOfNoticePeriod"
         handleChange={props.handleChange}
-        value={props.userDetails.endOfNoticePeriod}
+        value={props.userDetails.durationOfNoticePeriod}
         min={today}
         label="How long is your notice period?* (Mention in months)"
         required={props.userDetails.onNoticePeriod === "Yes"}

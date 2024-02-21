@@ -5,6 +5,7 @@ import { connection as db } from "./databaseConnection.js";
 import jwt from "jsonwebtoken";
 
 const getColleges = async () => {
+  console.log("called colleges");
   return new Promise((resolve, reject) => {
     const query = `
         SELECT * FROM Colleges;
@@ -57,14 +58,12 @@ const getJobRole = async (parent, args, context, info) => {
 };
 
 const getWalkinListing = async (parent, args, context, info) => {
-  // console.log("token:", context);
-  // console.log("args", args);
-  // const decodedToken = verifyToken(context.authorization);
-  // if (!decodedToken) {
-  //   throw new Error("Unauthorized");
-  // }
+  console.log("token:", context.authorization);
+  if (!verifyToken(context.authorization)) {
+    throw new Error("Unauthorized");
+  }
   const { listingId } = args;
-  console.log("called for individual  listing with id ", listingId);
+  // console.log("called for individual  listing with id ", listingId);
   return new Promise((resolve, reject) => {
     const query = `
         SELECT listing_id,
@@ -91,7 +90,11 @@ const getWalkinListing = async (parent, args, context, info) => {
 };
 
 const getAllWalkinListing = async (parent, args, context, info) => {
-  console.log("getAllWalkinListing called");
+  console.log("token:", context.authorization);
+  // console.log("getAllWalkinListing called");
+  if (!verifyToken(context.authorization)) {
+    throw new Error("Unauthorized");
+  }
   return new Promise((resolve, reject) => {
     const getAllListingIdsQuery = `
       SELECT listing_id FROM walkinlisting;
@@ -237,11 +240,9 @@ const getApplicationpreferredRoles = async (parent, args, context, info) => {
   });
 };
 const getApplication = async (parent, args, context, info) => {
-  // console.log("in:", context);
-  // const decodedToken = verifyToken(context.authorization);
-  // if (!decodedToken) {
-  //   throw new Error("Unauthorized");
-  // }
+  if (!verifyToken(context.authorization)) {
+    throw new Error("Unauthorized");
+  }
   const { ApplicationId } = args;
   return new Promise((resolve, reject) => {
     const query = `
@@ -259,7 +260,10 @@ const getApplication = async (parent, args, context, info) => {
   });
 };
 
-const getHallTicket = async (_, { email, listingId }, { context }) => {
+const getHallTicket = async (_, { email, listingId }, context) => {
+  if (!verifyToken(context.authorization)) {
+    throw new Error("Unauthorized");
+  }
   try {
     // Query to fetch userId based on email
     const userIdQuery = `

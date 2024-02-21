@@ -55,6 +55,9 @@ p {
     height: 20px;
     transform: rotate(180deg);
   }
+  h3 {
+    margin: 0px;
+  }
 }
 
 .application_form {
@@ -72,8 +75,9 @@ p {
 .details_tab {
   background-color: $card-color;
   @include flex(column, start, start);
+  padding: 16px;
   padding-top: 0px;
-
+  @include dropshadow();
   li {
     font-size: 14px;
     font-weight: 600;
@@ -82,11 +86,10 @@ p {
   label {
     font-size: 12px;
   }
-  @include ul;
   div {
     padding-bottom: 16px;
     width: 100%;
-    border-bottom: 1px solid $secondary-text-color;
+    border-bottom: 1px solid $seperator-color;
     padding-top: 16px;
     &:last-child {
       border-bottom: none;
@@ -97,7 +100,9 @@ p {
 .rotated {
   transform: rotate(180deg);
 }
-
+details {
+  position: relative;
+}
 details[open] > summary > img {
   transform: rotate(0deg);
 }
@@ -106,4 +111,12 @@ details[open] > summary > img {
   ul {
     list-style-type: "-";
   }
+}
+.file_upload {
+  padding-left: 8px;
+}
+
+.all_job > div:last-child > h4 {
+  border: none;
+  margin: 10px 0px;
 }

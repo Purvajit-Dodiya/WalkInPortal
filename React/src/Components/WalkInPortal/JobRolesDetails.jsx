@@ -11,7 +11,7 @@ const JobRolesDetails = (props) => {
           <h3>{jobrole.role.role_name}</h3>
           <img src="/src/icons/expand_less_black_24dp.svg" alt="" />
         </summary>
-        <div className="listing">
+        <div className="details_tab">
           <div className="general-instruction-tab ">
             <label>Compensation</label>
             <ul>

@@ -5,8 +5,12 @@ import ListingDisplay from "./ListingDisplay";
 import { Link } from "react-router-dom";
 import { useQuery, gql } from "@apollo/client";
 import { getAllWalkinListing } from "/src/Graphql/Queries.graphql";
+import Cookies from "js-cookie";
+import { checkLoggedIn } from "../Utils";
 
 const WalkInHome = () => {
+  checkLoggedIn();
+
   const [ListingsData, setListingsData] = React.useState([]);
   const { loading, error, data } = useQuery(getAllWalkinListing);
   if (loading) console.log("loading", loading);
@@ -15,45 +19,17 @@ const WalkInHome = () => {
   React.useEffect(() => {
     if (data) setListingsData(data.getAllWalkinListing);
   }, [data]);
-  // React.useEffect(() => {
-  //   const fetchListings = async () => {
-  //     try {
-  //       const response = await fetch("http://localhost:3000/api/listing");
-  //       if (!response.ok) {
-  //         throw new Error("Failed to fetch listings");
-  //       }
-  //       const data = await response.json();
-  //       setListingsData(data);
-  //     } catch (error) {
-  //       console.error("Error:", error);
-  //     }
-  //   };
-
-  //   fetchListings();
-  // }, []);
-
   console.log("ListingsData array", ListingsData);
   const AllListing = ListingsData.map((x) => (
     <ListingDisplay apply={false} key={x.listing_id} data={x} />
   ));
   return (
     <section className="head_body_footer">
-      <Header />
+      <Header user={true} />
       <div className="listing_tab">{AllListing}</div>
+      <div></div>
     </section>
   );
 };
 
 export default WalkInHome;
-
-// <section className="head_body_footer">
-
-//   <Header />
-
-//   <div className="listing_tab">
-//     <ListingDisplay />
-//     <ListingDisplay />
-//     <ListingDisplay />
-//   </div>
-//   <div></div>
-// </section>

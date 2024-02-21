@@ -134,7 +134,7 @@ function Register() {
   }
   return (
     <div className="head_body">
-      <Header />
+      <Header user={false} />
       {renderSwitch()}
     </div>
   );

@@ -2,23 +2,35 @@
 @import "variables";
 .listing_tab {
   font-family: Quicksand;
-  margin: 24px;
+  margin: 0px 24px;
+  &:last-child {
+    margin-bottom: 30px;
+  }
   .listing {
+    position: relative;
     background-color: $card-color;
     @include dropshadow();
     padding: 16px;
-    margin-bottom: 24px;
-    // height: 244px;
+    margin-top: 24px;
     label {
       font-size: 12px;
       color: $secondary-text-color;
     }
     p {
-      color: $black;
       font-size: 14px;
       font-weight: 600;
     }
   }
+}
+.expire {
+  position: absolute;
+  top: -10px;
+  right: 8px;
+  font-size: 12px;
+  padding: 2px 8px;
+  color: #d10107;
+  background-color: #ffe4e6;
+  border-radius: 2px;
 }
 
 .tab {
@@ -44,7 +56,8 @@
   }
   .job_role_text {
     color: $link-text-color;
-    border-right: 1px solid rgba(0, 0, 0, 0.123);
+    margin: 0px;
+    border-right: 1px solid $seperator-color;
     padding-right: 8px;
     margin-right: 8px;
   }
@@ -55,17 +68,28 @@
     border-right: 1px solid rgba(0, 0, 0, 0.123);
   }
 }
-.location {
+.city {
   padding: 0px 10px;
   padding-top: 20px;
+  color: $secondary-text-color;
   @include flex(row, start, end);
   img {
     height: 18px;
+    filter: invert(40%) sepia(0%) saturate(0%) hue-rotate(21deg) brightness(97%)
+      contrast(87%);
   }
 }
 .button_tab {
   width: 100%;
+  padding-top: 20px;
   @include flex(row, center, center);
+}
+.special_note {
+  border-radius: 9px;
+  background: #eedd6b;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 500;
 }
 
 hr {

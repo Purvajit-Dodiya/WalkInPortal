@@ -6,7 +6,8 @@ import {
   Navigate,
 } from "react-router-dom";
 import Login from "./Components/Login";
-import Register from "./Components/Registration/Register";
+// import Register from "./Components/Registration/Register";
+import Register from "./Components/Register/RegisterPage.jsx";
 import WalkInHome from "./Components/WalkInPortal/WalkInHome";
 import IndividualListing from "./Components/WalkInPortal/IndividualListing";
 import SuccessPage from "./Components/WalkInPortal/SuccessPage";

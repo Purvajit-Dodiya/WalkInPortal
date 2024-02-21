@@ -78,6 +78,7 @@ p {
 .user_profile {
   height: 40px;
   width: 40px;
+  position: relative;
   border-radius: 50%;
   border: 2px solid $primary-button-color;
   background-color: $user-bg;
@@ -89,6 +90,19 @@ p {
     padding: 5;
     margin: 5px 0px;
     text-align: center;
+  }
+  .logout_button {
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: -32px;
+    width: 100px;
+    text-align: center;
+  }
+  &:hover {
+    .logout_button {
+      display: inline;
+    }
   }
 }
 
@@ -112,12 +126,6 @@ footer {
     .contact_us {
       border-left: 1px solid $seperator-color;
     }
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  .login_form {
-    width: 275px;
   }
 }
 
@@ -174,4 +182,70 @@ h1 {
   color: black;
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.apply {
+  margin-left: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .login_form {
+    width: 275px;
+  }
+  .apply {
+    margin: 0px;
+    padding: 15px;
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+    right: 0px;
+    z-index: 100;
+  }
+  .all_job {
+    @include flex(column, start, start);
+    .job_role_container {
+      h4 {
+        padding: 5px;
+        margin: 0px;
+        border: none;
+      }
+    }
+  }
+}
+
+ul {
+  padding: 0px;
+}
+.margin-top {
+  margin-top: 20px;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(36%) sepia(56%) saturate(533%) hue-rotate(103deg)
+    brightness(95%) contrast(89%);
+  width: 20px;
+  height: 20px;
+}
+.date {
+  outline: none;
+  border: none;
+  border-bottom: 2px solid $seperator-color;
+  padding: 5px;
+}
+.date {
+  svg {
+    filter: brightness(0) saturate(100%) invert(36%) sepia(88%) saturate(367%)
+      hue-rotate(103deg) brightness(88%) contrast(87%);
+  }
+}
+.input_container {
+  .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
+    transform: translate(0px, 16px) scale(1);
+  }
+  .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root {
+    transform: translate(0px, -9px) scale(0.8);
+  }
+}
+fieldset {
+  margin: 0px;
+  padding: 0px;
 }

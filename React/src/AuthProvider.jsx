@@ -21,6 +21,7 @@ const AuthProvider = ({ children }) => {
     setToken(null);
     Cookies.remove("walkInEmail");
     setUserEmail(null);
+    window.location.href = "/login";
   };
   return (
     <AuthContext.Provider value={{ token, userEmail, login, logout }}>

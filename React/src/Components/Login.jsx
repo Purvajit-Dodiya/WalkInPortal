@@ -6,8 +6,13 @@ import { AuthContext } from "../AuthProvider";
 import { useContext } from "react";
 import { useQuery, useMutation, gql } from "@apollo/client";
 import { loginMutation } from "/src/Graphql/Mutation.graphql";
+import Cookies from "js-cookie";
 
 export default function Login(props) {
+  const token = Cookies.get("walkInToken");
+  if (token) {
+    window.location.href = "/";
+  }
   const { login } = useContext(AuthContext);
   const [loginDetails, setLoginDetails] = React.useState({
     email: "",
@@ -77,7 +82,7 @@ export default function Login(props) {
 
   return (
     <div className="head_body_footer">
-      <Header />
+      <Header user={false} />
       <div className="login_container">
         <form onSubmit={handleSubmit} className="login_form">
           <h1>Log in</h1>

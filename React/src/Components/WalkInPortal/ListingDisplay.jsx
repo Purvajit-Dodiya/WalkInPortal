@@ -38,6 +38,9 @@ const ListingDisplay = (props) => {
   // console.log(formattedDate);
   return (
     <section className="listing">
+      {props.data.listing_id == 1 && (
+        <span className="expire">Expires in 5 days</span>
+      )}
       <div className="tab apply_tab">
         <h1>{props.data.listing_name}</h1>
         {props.apply && (
@@ -53,15 +56,19 @@ const ListingDisplay = (props) => {
             {props.data.StartDate} to {props.data.EndDate}
           </p>
         </div>
-        <div className="location">
+        <div className="city">
           <img src={location_icon} alt="location" />
           <p>{props.data.City}</p>
         </div>
       </div>
       <hr />
       <label>Job Roles :</label>
-      <div className="tab">{rolesDisplay}</div>
-
+      <div className="all_job tab">{rolesDisplay}</div>
+      {props.data.listing_id == 2 && (
+        <span className="special_note">
+          Internship Opportunity for MCA Students
+        </span>
+      )}
       {props.apply === false && (
         <div className="button_tab">
           <Link to={`/listing/${props.data.listing_id}`}>

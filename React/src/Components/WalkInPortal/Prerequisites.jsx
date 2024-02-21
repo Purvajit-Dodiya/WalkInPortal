@@ -11,7 +11,7 @@ function Prerequisites(props) {
       </div>
     );
   });
-  return <div className="listing details_tab">{display}</div>;
+  return <div className="details_tab">{display}</div>;
 }
 
 export default Prerequisites;
