@@ -14,6 +14,7 @@ export default function ResponsiveDatePickers(props) {
       <DatePicker
         className="date"
         readOnly={props.values.onNoticePeriod == "Yes" ? false : true}
+        required={props.values.onNoticePeriod == "Yes" ? "required" : ""}
         component="DatePicker"
         label="If Yes, when will your notice period end?*"
         format="DD-MM-YYYY"

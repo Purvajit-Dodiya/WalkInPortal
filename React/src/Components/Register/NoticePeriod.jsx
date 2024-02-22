@@ -34,22 +34,33 @@ const NoticePeriod = (props) => {
           />
           No
         </label>
-        <div style={{ display: "flex", width: "100%" }}>
-          <div className="input_container" style={{ flex: "1" }}>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            gap: "20px",
+            alignItems: "end",
+          }}
+        >
+          <div className="" style={{ flex: "1" }}>
             <ResponsiveDatePickers
               values={props.values}
               setdate={props.setdate}
             />
           </div>
 
-          <div className="input_container" style={{ flex: "1" }}>
+          <div className="" style={{ flex: "1" }}>
             <Field
-              readOnly={props.values.onNoticePeriod == "Yes" ? false : true}
-              style={{ width: "600px" }}
+              readOnly={
+                props.values.onNoticePeriod == "No" || props.final
+                  ? true
+                  : false
+              }
               variant="standard"
               name="durationOfNoticePeriod"
               component={Select}
               label="How long is your notice period?* (Mention in months)"
+              required={props.values.onNoticePeriod == "Yes" ? "required" : ""}
             >
               <MenuItem value="1">1 months</MenuItem>
               <MenuItem value="2">2 months</MenuItem>

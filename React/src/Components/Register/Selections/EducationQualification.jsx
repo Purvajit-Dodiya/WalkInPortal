@@ -15,18 +15,20 @@ export default function EducationQualification(props) {
   if (error) console.log("error", error.message);
   // console.log("from graphql", data.getEducationQualifications);
   return (
-    <div className="input_container col13">
+    <div className="col13">
       <Field
+        readOnly={props.final}
         className="select"
         variant="standard"
         name="qualification"
         component={Select}
         label="Qualification*"
+        required
       >
         {data &&
           data.getEducationQualifications.map((item) => {
             return (
-              <MenuItem value={item.id}>
+              <MenuItem key={item.id} value={item.id}>
                 {item.education_qualification}
               </MenuItem>
             );

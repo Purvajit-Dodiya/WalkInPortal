@@ -18,7 +18,7 @@ type UserDetails {
   Resume: String!
   ProfilePhoto: String
   PortfolioURL: String
-  PreferredJobRole: [String]!
+  PreferredJobRole: String!
   HaveReferral: Boolean!
   ReferralEmployeeName: String
   ReceiveUpdates: Boolean!
@@ -187,7 +187,7 @@ type Mutation {
     resume: String
     profilePhoto: String
     portfolioURL: String
-    preferredJobRole: [String]!
+    preferredJobRole: String!
     haveReferral: Boolean!
     referralEmployeeName: String
     receiveUpdates: Boolean!

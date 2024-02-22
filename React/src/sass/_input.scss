@@ -39,6 +39,7 @@
 .input_field:focus + .input_label,
 .input_field:valid + .input_label {
   color: $secondary-text-color;
+  transform: translate(-25px, 10px) scale(0.8);
   -moz-transform: translateY(-25px);
   -ms-transform: translateY(-25px);
   -webkit-transform: translateY(-25px);

@@ -20,6 +20,7 @@
 html,
 body {
   height: 100%;
+  scroll-behavior: smooth;
 }
 body {
   margin: 0;
@@ -147,7 +148,6 @@ footer {
 
 .half {
   width: 50%;
-  padding: 10px 30px;
 }
 .full {
   width: 100%;
@@ -218,34 +218,4 @@ ul {
 }
 .margin-top {
   margin-top: 20px;
-}
-input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(36%) sepia(56%) saturate(533%) hue-rotate(103deg)
-    brightness(95%) contrast(89%);
-  width: 20px;
-  height: 20px;
-}
-.date {
-  outline: none;
-  border: none;
-  border-bottom: 2px solid $seperator-color;
-  padding: 5px;
-}
-.date {
-  svg {
-    filter: brightness(0) saturate(100%) invert(36%) sepia(88%) saturate(367%)
-      hue-rotate(103deg) brightness(88%) contrast(87%);
-  }
-}
-.input_container {
-  .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
-    transform: translate(0px, 16px) scale(1);
-  }
-  .css-1jy569b-MuiFormLabel-root-MuiInputLabel-root {
-    transform: translate(0px, -9px) scale(0.8);
-  }
-}
-fieldset {
-  margin: 0px;
-  padding: 0px;
 }

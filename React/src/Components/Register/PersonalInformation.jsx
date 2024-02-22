@@ -5,10 +5,29 @@ import * as Yup from "yup";
 import ProfilePhoto from "./ProfilePhoto";
 function PersonalInformation(props) {
   const personalInfoValidation = Yup.object({
-    firstname: Yup.string().required().label("First Name"),
-    lastname: Yup.string().required().label("Last Name"),
-    email: Yup.string().required().label("Last Name"),
-    phoneNumber: Yup.string().required().label("Last Name"),
+    firstname: Yup.string()
+      .matches(/^[a-zA-Z]+$/, "Invalid first name. Only letters are allowed.")
+      .required()
+      .label("First Name"),
+    lastname: Yup.string()
+      .matches(/^[a-zA-Z]+$/, "Invalid last name. Only letters are allowed.")
+      .required()
+      .label("Last Name"),
+    email: Yup.string()
+      .matches(
+        /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+        "Invalid email address"
+      )
+      .required("Email address is required")
+      .label("Email"),
+
+    phoneNumber: Yup.string("Enter a valid mobile number")
+      .matches(
+        /^\d{10}$/,
+        "Invalid mobile number. Please enter a 10-digit number."
+      )
+      .required()
+      .label("PhoneNumber"),
     preferredjobrole: Yup.array()
       .min(1, "At least one Job Role needs to be selected")
       .required("At least one Job Role needs to be selected")
@@ -25,50 +44,55 @@ function PersonalInformation(props) {
       onSubmit={handleSubmit}
     >
       {({ values, setFieldValue }) => {
-        console.log("values", values);
+        // console.log("values", values);
+
         return (
           <Form>
             <section className="container ">
               <div className="half">
-                <div className="rows input_container">
+                <div className="rows">
                   <Field
                     margin="normal"
                     fullWidth
                     variant="standard"
                     component={TextField}
-                    label="First Name*"
+                    label="First Name"
                     name="firstname"
+                    required
                   ></Field>
                 </div>
-                <div className="rows input_container">
+                <div className="rows ">
                   <Field
                     margin="normal"
                     fullWidth
                     variant="standard"
                     component={TextField}
-                    label="Last Name*"
+                    label="Last Name"
                     name="lastname"
+                    required
                   ></Field>
                 </div>
 
-                <div className="rows input_container">
+                <div className="rows ">
                   <Field
                     margin="normal"
                     fullWidth
                     variant="standard"
                     component={TextField}
-                    label="Email*"
+                    label="Email"
                     name="email"
+                    required
                   ></Field>
                 </div>
 
-                <div className="rows input_container">
+                <div className="rows ">
                   <Field
                     fullWidth
                     variant="standard"
                     component={TextField}
-                    label="Phone Number*"
+                    label="Phone Number"
                     name="phoneNumber"
+                    required
                   ></Field>
                 </div>
                 <div className="input_container">
@@ -86,7 +110,7 @@ function PersonalInformation(props) {
                     }}
                   />
                 </div>
-                <div className="rows input_container">
+                <div className="rows ">
                   <Field
                     fullWidth
                     variant="standard"
@@ -104,8 +128,8 @@ function PersonalInformation(props) {
                     component={CheckboxWithLabel}
                     type="checkbox"
                     name="preferredjobrole"
-                    value="Istructional Designer"
-                    Label={{ label: "Istructional Designer" }}
+                    value="Instructional Designer"
+                    Label={{ label: "Instructional Designer" }}
                   ></Field>
                   <Field
                     color="success"
@@ -153,9 +177,9 @@ function PersonalInformation(props) {
               </div>
               <div className="half right_top">
                 <div className="pad profile">
-                  <label htmlFor="profilePhoto" style={{ cursor: "pointer" }}>
+                  <div htmlFor="profilePhoto" style={{ cursor: "pointer" }}>
                     <ProfilePhoto file={values.profilePhoto} />
-                  </label>
+                  </div>
                   <label htmlFor="profilePhoto" className="upload_label">
                     UPLOAD DISPLAY PICTURE
                   </label>
@@ -167,6 +191,7 @@ function PersonalInformation(props) {
                     type="file"
                     name="profilePhoto"
                     id="profilePhoto"
+                    accept="image/gif, image/jpeg, image/png"
                     onChange={(e) => {
                       setFieldValue("profilePhoto", e.target.files[0]);
                     }}
@@ -179,7 +204,7 @@ function PersonalInformation(props) {
             ) : (
               <div className="center">
                 <button className="button" type="submit">
-                  Next
+                  NEXT
                 </button>
               </div>
             )}

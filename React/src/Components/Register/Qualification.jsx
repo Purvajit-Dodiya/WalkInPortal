@@ -14,18 +14,27 @@ import * as Yup from "yup";
 import Colleges from "./Selections/Colleges";
 import EducationQualifications from "./Selections/EducationQualification";
 import ProfessionalQualifications from "./ProfessionalQualifications";
+import { setLocale } from "yup";
+setLocale({
+  mixed: {
+    notType: "the ${path} is obligatory",
+    required: "the field ${path} is obligatory",
+    oneOf: "the field ${path} must have one of the following values: ${values}",
+  },
+});
 
 function Qualification(props) {
   const qualificationValidation = Yup.object({
     aggregatePercentage: Yup.number("Enter Digits")
-      .min(0)
-      .max(100)
-      .label("Aggregate Percentage"),
+      .min(0, "Aggregate percentage must be greater than or equal to 0")
+      .max(100, "Aggregate percentage must be less than or equal to 100")
+      .required("Aggregate percentage is required"),
     yearOfPassing: Yup.number().required("Select year of passing"),
     stream: Yup.string().required("Select your Strem"),
     college: Yup.string().required("Select your College"),
     qualification: Yup.string().required("Select your Qualification"),
-    collegeLocation: Yup.string().required("Enter your college location"),
+    collegeLocation: Yup.string().required("College location is required"),
+    applicantType: Yup.string().required("Applicant type is required"),
   });
   function handleSubmit(values) {
     console.log(values);
@@ -46,7 +55,7 @@ function Qualification(props) {
       {({ values, setFieldValue }) => {
         // console.log(values);
         return (
-          <Form >
+          <Form>
             <details
               open
               className=""
@@ -60,38 +69,42 @@ function Qualification(props) {
               </summary>
 
               <div className="educational_qualifications ">
-                <div className="input_container col1">
+                <div className=" col1">
                   <Field
                     fullWidth
                     variant="standard"
                     component={TextField}
                     label="Aggregate Percentage"
                     name="aggregatePercentage"
+                    required
                   ></Field>
                 </div>
 
-                <div className="input_container col1">
+                <div className=" col1">
                   <Field
-                    sx={{ width: "300px" }}
+                    readOnly={props.final}
                     variant="standard"
                     name="yearOfPassing"
                     component={Select}
                     label="Year of Passing*"
+                    required
                   >
                     <MenuItem value={2019}>2019</MenuItem>
                     <MenuItem value={2020}>2020</MenuItem>
                     <MenuItem value={2021}>2021</MenuItem>
                   </Field>
                 </div>
-                <EducationQualifications />
+                <EducationQualifications final={props.final} />
 
-                <div className="input_container col35">
+                <div className=" col35">
                   <Field
+                    readOnly={props.final}
                     className="select"
                     variant="standard"
                     name="stream"
                     component={Select}
                     label="Stream*"
+                    required
                   >
                     <MenuItem value="cs">Computer Science</MenuItem>
                     <MenuItem value="it">Information Technology</MenuItem>
@@ -99,8 +112,8 @@ function Qualification(props) {
                     <MenuItem value="medical">Medical</MenuItem>
                   </Field>
                 </div>
-                <Colleges />
-                <div className="input_container col35">
+                <Colleges final={props.final} />
+                <div className=" col35">
                   <Field
                     className="select"
                     variant="standard"
@@ -109,13 +122,14 @@ function Qualification(props) {
                     name="otherCollege"
                   ></Field>
                 </div>
-                <div className="input_container col1">
+                <div className=" col1">
                   <Field
                     fullWidth
                     variant="standard"
                     component={TextField}
-                    label="Where is your college located?*"
+                    label="Where is your college located?"
                     name="collegeLocation"
+                    required
                   ></Field>
                 </div>
               </div>
@@ -139,7 +153,7 @@ function Qualification(props) {
                       className="radio"
                       type="radio"
                       name="applicantType"
-                      value="fresher"
+                      value="Fresher"
                     />
                     Fresher
                   </label>
@@ -148,7 +162,7 @@ function Qualification(props) {
                       className="radio"
                       type="radio"
                       name="applicantType"
-                      value="experienced"
+                      value="Experienced"
                     />
                     Experienced
                   </label>
@@ -163,8 +177,9 @@ function Qualification(props) {
                 setdate={setFieldValue}
                 values={values}
                 experienced={
-                  values.applicantType == "experienced" ? true : false
+                  values.applicantType == "Experienced" ? true : false
                 }
+                final={props.final}
               />
             </div>
             {props.final ? (
@@ -176,10 +191,10 @@ function Qualification(props) {
                   type="button"
                   onClick={() => props.prev(values)}
                 >
-                  Previous
+                  PREVIOUS
                 </button>
                 <button className="button" type="submit">
-                  Next
+                  NEXT
                 </button>
               </div>
             )}

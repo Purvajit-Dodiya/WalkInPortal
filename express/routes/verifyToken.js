@@ -8,7 +8,7 @@ function verifyToken(req, res, next) {
     return res.status(401).json({ error: "Token is required" });
   }
   console.log("token:", token);
-  jwt.verify(token, "a", (err, decoded) => {
+  jwt.verify(token, "secure", (err, decoded) => {
     if (err) {
       console.log("test:", err);
       return res.status(401).json({ error: "Invalid token" });

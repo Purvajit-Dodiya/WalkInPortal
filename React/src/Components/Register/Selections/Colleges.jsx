@@ -19,17 +19,23 @@ export default function Colleges(props) {
   //     if (data) collegeData.push(...data.getColleges);
   //   }, []);
   return (
-    <div className="input_container col13">
+    <div className=" col13">
       <Field
+        readOnly={props.final}
         className="select"
         variant="standard"
         name="college"
         component={Select}
         label="College*"
+        required
       >
         {data &&
           data.getColleges.map((x) => {
-            return <MenuItem value={x.college_id}>{x.college_name}</MenuItem>;
+            return (
+              <MenuItem key={x.college_id} value={x.college_id}>
+                {x.college_name}
+              </MenuItem>
+            );
           })}
       </Field>
     </div>

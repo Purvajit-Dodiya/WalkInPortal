@@ -11,7 +11,7 @@ import Register from "./Components/Register/RegisterPage.jsx";
 import WalkInHome from "./Components/WalkInPortal/WalkInHome";
 import IndividualListing from "./Components/WalkInPortal/IndividualListing";
 import SuccessPage from "./Components/WalkInPortal/SuccessPage";
-
+import ErrorPage from "./Components/ErrorPage.jsx";
 const App = () => {
   return (
     <Router>
@@ -23,7 +23,7 @@ const App = () => {
         <Route path="/success/:id" element={<SuccessPage />} />
         <Route exact path="/register" element={<Register />}></Route>
         <Route exact path="/register" element={<Register />}></Route>
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Router>
   );

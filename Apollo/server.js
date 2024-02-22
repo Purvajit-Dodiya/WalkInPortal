@@ -372,7 +372,7 @@ const registerMutation = async (_, { input }) => {
             endDateOfNotice,
             durationOfNoticePeriod,
           } = input;
-
+          console.log(preferredJobRole);
           // Insert user credentials
           const insertUserCredentialsQuery = `
             INSERT INTO usercredentials (Email, Password, PhoneNumber, dt_created, dt_modified)
@@ -419,7 +419,7 @@ const registerMutation = async (_, { input }) => {
                 resume,
                 profilePhoto,
                 portfolioURL,
-                preferredJobRole[0], //nedd a change
+                preferredJobRole, //nedd a change
                 haveReferral,
                 referralEmployeeName,
                 receiveUpdates,

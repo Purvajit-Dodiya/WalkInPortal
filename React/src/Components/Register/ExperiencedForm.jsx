@@ -1,20 +1,22 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { TextField, CheckboxWithLabel, SimpleFileUpload } from "formik-mui";
-const ExperiencedForm = () => {
+const ExperiencedForm = (props) => {
   return (
     <div>
-      <div className="input_container">
+      <div className="">
         <Field
           margin="normal"
           fullWidth
           variant="standard"
           component={TextField}
-          label="Years of Experience*"
+          label="Years of Experience"
           name="yearsOfExperiece"
+          required={props.experienced}
         ></Field>
+        <ErrorMessage name="yearsOfExperiece">Error</ErrorMessage>
       </div>
-      <div className="input_container">
+      <div className="">
         <Field
           margin="normal"
           fullWidth
@@ -22,9 +24,10 @@ const ExperiencedForm = () => {
           component={TextField}
           label="Current CTC* (In Rupees)"
           name="currentCTC"
+          required={props.experienced}
         ></Field>
       </div>
-      <div className="input_container">
+      <div className="">
         <Field
           margin="normal"
           fullWidth
@@ -32,9 +35,10 @@ const ExperiencedForm = () => {
           component={TextField}
           label="Expected CTC* (In Rupees)"
           name="expectedCTC"
+          required={props.experienced}
         ></Field>
       </div>
-      <div className="rows input_container">
+      <div className="rows ">
         <label className="static_input_label">Preferred Job Role *</label>
         <Field
           color="success"
@@ -83,6 +87,7 @@ const ExperiencedForm = () => {
           component={TextField}
           label="If others, please mention"
           name="expertiseInTechnologiesotherTechnology"
+          required={props.values.expertiseInTechnologiesother ? "required" : ""}
         ></Field>
         <ErrorMessage
           name="expertiseInTechnologies"

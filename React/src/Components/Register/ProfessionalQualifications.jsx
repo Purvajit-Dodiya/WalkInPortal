@@ -6,7 +6,13 @@ import NoticePeriod from "./NoticePeriod";
 const ProfessionalQualifications = (props) => {
   return (
     <div>
-      {props.experienced && <ExperiencedForm />}
+      {props.experienced && (
+        <ExperiencedForm
+          final={props.final}
+          values={props.values}
+          experienced={props.experienced}
+        />
+      )}
       <div className="rows input_container">
         <label className="static_input_label">Preferred Job Role *</label>
         <Field
@@ -56,6 +62,7 @@ const ProfessionalQualifications = (props) => {
           component={TextField}
           label="If others, please mention"
           name="familiarTechnologiesotherTechnology"
+          required={props.values.familiarTechnologiesother ? "required" : ""}
         ></Field>
         <ErrorMessage
           name="familiarTechnologies"
@@ -64,7 +71,11 @@ const ProfessionalQualifications = (props) => {
         />
       </div>
       {props.experienced && (
-        <NoticePeriod values={props.values} setdate={props.setdate} />
+        <NoticePeriod
+          values={props.values}
+          setdate={props.setdate}
+          final={props.final}
+        />
       )}
 
       <label className="static_input_label">
@@ -96,6 +107,7 @@ const ProfessionalQualifications = (props) => {
           component={TextField}
           label="If Yes, which role did you apply for?"
           name="roleApplied"
+          required={props.values.appearedBefore == "Yes" ? "required" : ""}
         ></Field>
       </div>
     </div>

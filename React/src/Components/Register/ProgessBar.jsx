@@ -12,10 +12,12 @@ function ProgessBar(props) {
         <p>Create an account</p>
         <div className="action">
           <Link to="/login">
-            <button className="button">CANCEL</button>
+            <button className="button cancel_btn">CANCEL</button>
           </Link>
           <button
-            className={`button ${props.step != 2 ? " disabled_btn" : ""}`}
+            className={`button create_btn ${
+              props.step != 2 ? " disabled_btn" : ""
+            }`}
             disabled={props.step != 2 ? true : false}
             onClick={() => {
               props.submit({}, true);
