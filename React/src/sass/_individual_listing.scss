@@ -77,6 +77,7 @@ p {
   @include flex(column, start, start);
   padding: 16px;
   padding-top: 0px;
+  transition: 1s ease-in;
   @include dropshadow();
   li {
     font-size: 14px;

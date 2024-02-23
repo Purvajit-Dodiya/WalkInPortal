@@ -31,7 +31,7 @@ const data = {
   collegeLocation: "",
   applicantType: "Fresher",
   familiarTechnologies: [],
-  familiarTechnologiesother: [],
+  familiarTechnologiesother: "",
   familiarTechnologiesotherTechnology: "",
   appearedBefore: "No",
   roleApplied: "",
@@ -163,6 +163,8 @@ const RegisterPage = (props) => {
   };
   function changeToSpecificStep(step) {
     setCurrentStep(step);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }
   const steps = [
     <PersonalInformation

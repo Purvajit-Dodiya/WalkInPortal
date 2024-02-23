@@ -46,11 +46,6 @@
   font-size: 12px;
   transform: translateY(-25px);
 }
-.static_input_label {
-  color: $secondary-text-color;
-  font-size: 12px;
-  font-weight: 500;
-}
 
 .checkbox {
   accent-color: $link-text-color;
@@ -60,19 +55,5 @@
   top: 3px;
 }
 .checkbox_label {
-  color: $text-color;
-}
-.radio_group {
-  padding: 16px 0px;
-}
-.radio {
-  accent-color: $link-text-color;
-  width: 18px;
-  height: 18px;
-  position: relative;
-  top: 3px;
-}
-.radio_label {
-  padding-right: 20px;
   color: $text-color;
 }
