@@ -1,10 +1,10 @@
 import React from "react";
-import Header from "../Header.jsx";
+import Header from "../Components/Header.jsx";
 import { useQuery, gql } from "@apollo/client";
 import { Link, useParams } from "react-router-dom";
 import { getHallTicket } from "/src/Graphql/Queries.graphql";
 import Cookies from "js-cookie";
-import { checkLoggedIn } from "../Utils.js";
+import { checkLoggedIn } from "../Components/Utils.js";
 import { useReactToPrint } from "react-to-print";
 
 function SuccessPage() {

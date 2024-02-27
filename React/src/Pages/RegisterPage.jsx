@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Card, CardContent, TextField, Typography } from "@mui/material";
 import { Formik, Form, Field } from "formik";
-import PersonalInformation from "./PersonalInformation";
-import Qualification from "./Qualification";
-import Header from "../Header";
+import PersonalInformation from "../Components/Register/PersonalInformation";
+import Qualification from "../Components/Register/Qualification";
+import Header from "../Components/Header";
 import * as Yup from "yup";
 import dayjs from "dayjs";
-import ProgessBar from "./ProgessBar";
-import ReviewSubmit from "./ReviewSubmit";
+import ProgessBar from "../Components/Register/ProgessBar";
+import ReviewSubmit from "../Components/Register/ReviewSubmit";
 import { registerMutation } from "/src/Graphql/Mutation.graphql";
 import { useQuery, useMutation, gql } from "@apollo/client";
 const data = {

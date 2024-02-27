@@ -5,12 +5,12 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import Login from "./Components/Login";
-import Register from "./Components/Register/RegisterPage.jsx";
-import WalkInHome from "./Components/WalkInPortal/WalkInHome";
-import IndividualListing from "./Components/WalkInPortal/IndividualListing";
-import SuccessPage from "./Components/WalkInPortal/SuccessPage";
-import ErrorPage from "./Components/ErrorPage.jsx";
+import Login from "./Pages/Login";
+import Register from "./Pages/RegisterPage.jsx";
+import WalkInHome from "./Pages/WalkInHome.jsx";
+import IndividualListing from "./Pages/IndividualListing.jsx";
+import SuccessPage from "./Pages/SuccessPage.jsx";
+import ErrorPage from "./Pages/ErrorPage.jsx";
 const App = () => {
   return (
     <Router>

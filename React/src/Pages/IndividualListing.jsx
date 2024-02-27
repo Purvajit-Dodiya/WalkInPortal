@@ -1,16 +1,15 @@
 import React from "react";
-import ListingDisplay from "./ListingDisplay";
-import Prerequisites from "./Prerequisites";
-import ApplicationForm from "./ApplicationForm";
-import JobRolesDetails from "./JobRolesDetails";
-import Header from "../Header";
-import { data } from "./ListingData";
+import ListingDisplay from "../Components/WalkInPortal/ListingDisplay";
+import Prerequisites from "../Components/WalkInPortal/Prerequisites";
+import ApplicationForm from "../Components/WalkInPortal/ApplicationForm";
+import JobRolesDetails from "../Components/WalkInPortal/JobRolesDetails";
+import Header from "../Components/Header";
 import { Link, useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useQuery, useMutation, gql } from "@apollo/client";
 import { getWalkinListing } from "/src/Graphql/Queries.graphql";
 import { apllyMutation } from "/src/Graphql/Mutation.graphql";
-import { checkLoggedIn } from "../Utils";
+import { checkLoggedIn } from "../Components/Utils";
 
 const IndividualListing = () => {
   const { id } = useParams();

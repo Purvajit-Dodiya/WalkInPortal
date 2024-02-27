@@ -1,12 +1,11 @@
 import React from "react";
-import Header from "../Header";
-import ListingDisplay from "./ListingDisplay";
-// import { data } from "./ListingData";
+import Header from "../Components/Header";
+import ListingDisplay from "../Components/WalkInPortal/ListingDisplay";
 import { Link } from "react-router-dom";
 import { useQuery, gql } from "@apollo/client";
 import { getAllWalkinListing } from "/src/Graphql/Queries.graphql";
 import Cookies from "js-cookie";
-import { checkLoggedIn } from "../Utils";
+import { checkLoggedIn } from "../Components/Utils";
 
 const WalkInHome = () => {
   checkLoggedIn();
