@@ -123,7 +123,7 @@ const RegisterPage = (props) => {
     },
     onCompleted: (data) => {
       console.log("Register mutaion", data);
-      alert("Registration Complete");
+      alert("Registration Complete. Password is sent to your Email ID!");
       window.location.href = "/login";
     },
     onError: ({ graphQLErrors, networkError }) => {

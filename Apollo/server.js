@@ -3,6 +3,22 @@ import { startStandaloneServer } from "@apollo/server/standalone";
 import { typeDefs } from "./typeDefs.js";
 import { connection as db } from "./databaseConnection.js";
 import jwt from "jsonwebtoken";
+import nodemailer from "nodemailer";
+import generator from "generate-password";
+const contactmailer = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "cinematicchaos70@gmail.com",
+    pass: "rkooslvismsqjgxm",
+  },
+});
+contactmailer.verify((error) => {
+  if (error) {
+    console.log("mail config error", error);
+  } else {
+    console.log("mail config ready");
+  }
+});
 
 const getColleges = async () => {
   console.log("called colleges");
@@ -328,7 +344,29 @@ const loginMutation = async (_, { email, password }) => {
 };
 
 const registerMutation = async (_, { input }) => {
+  // const generatedPassword = "mypass";
+  const generatedPassword = generator.generate({
+    length: 7,
+    numbers: true,
+  });
   try {
+    const mailDraft = {
+      from: "cinematicchaos70@gmail.com",
+      to: input.email,
+      subject: `Welcome to Walk-In Portal`,
+      html: `
+          <p>Hello!</p>
+          <p>Welcome to Walk-In Portal!</p>
+          <p>Your login information:</p>
+          <ul>
+              <li><strong>Email:</strong> ${input.email}</li>
+              <li><strong>Password:</strong> "${generatedPassword}"</li>
+          </ul>
+          <p>Reach out if you need assistance.</p>
+          <p>Regards,<br/>Walk-In Portal Team</p>
+      `,
+    };
+
     // Begin transaction
     await new Promise((resolve, reject) => {
       db.beginTransaction(async (err) => {
@@ -381,7 +419,7 @@ const registerMutation = async (_, { input }) => {
           await new Promise((resolve, reject) => {
             db.query(
               insertUserCredentialsQuery,
-              [email, password, phoneNumber],
+              [email, generatedPassword, phoneNumber],
               (error) => {
                 if (error) reject(error);
                 else resolve();
@@ -489,7 +527,12 @@ const registerMutation = async (_, { input }) => {
           // Commit transaction
           db.commit((error) => {
             if (error) reject(error);
-            else resolve();
+            else {
+              contactmailer.sendMail(mailDraft, (error) => {
+                console.log(error || "Email sent");
+              });
+              resolve();
+            }
           });
         } catch (error) {
           // Rollback on error
